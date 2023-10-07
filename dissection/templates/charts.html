@@ -1,0 +1,315 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Defects4J Dissection Charts</title>
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="style/style.css">
+
+		<script type="text/javascript">
+			function loadData(callback) {
+				var bugs = null;
+				var classification = null;
+
+				function end() {
+					if (bugs != null && classification != null) {
+						callback(classification, bugs);
+					}
+				}
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						bugs = JSON.parse(this.responseText);
+						end();
+					}
+				};
+				xhttp.open("GET", "data/defects4j-bugs.json", true);
+				xhttp.send();
+
+				xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						classification = JSON.parse(this.responseText);
+						end();
+					}
+				};
+				xhttp.open("GET", "data/classification.json", true);
+				xhttp.send();
+			}
+			loadData(function (classifications, bugs) {
+
+				var getActionPattern = function (type, bug) {
+					type = type.replace("Repair ", "repair")
+					return bug[type];
+				}
+
+				function getParentLabel(label) {
+					for (var type in classifications) {
+						for(var group in classifications[type]) {
+							if (classifications[type][group][label] != null) {
+								return group;
+							}
+						}
+					}
+				}
+
+				function getLabelData (obj, sort) {
+					if (sort ==null) {
+						sort = true;
+					} 
+					var labels = Object.keys(obj)
+					if (sort) {
+						labels = labels.sort(function (a, b) {
+							return obj[b] - obj[a];
+						});
+					}
+					var data = Object.values(obj);
+					if (sort) {
+						data = data.sort(function (a, b) {
+							return b - a;
+						});
+					}
+					return {labels: labels, data:data};
+				}
+
+				function getBugWith(id) {
+					var output = [];
+					for (var i in bugs) {
+						var bug = bugs[i];
+						if (bug[id] != null
+							|| bug.repairPatterns.indexOf(id) != -1
+							|| bug.repairTools.indexOf(id) != -1
+							|| bug.repairActions.indexOf(id) != -1) {
+							output.push(bug);
+						}
+					}
+					return output;
+				}
+
+
+				var nbPatchActions = {};
+				var nbPatchPatterns = {};
+
+				var nbDistributionActions = {};
+				var nbDistributionPatterns = {};
+				for (var i in bugs) {
+					var bug = bugs[i];
+					var actions = getActionPattern('Repair Actions', bug);
+					var patterns = getActionPattern('Repair Patterns', bug);
+
+					if (nbDistributionActions[actions.length] == null) {
+						nbDistributionActions[actions.length] = 0;
+					}
+					nbDistributionActions[actions.length]++;
+
+					if (nbDistributionPatterns[patterns.length] == null) {
+						nbDistributionPatterns[patterns.length] = 0;
+					}
+					nbDistributionPatterns[patterns.length]++;
+
+					for (var a in actions) {
+						var act = actions[a];
+						if (nbPatchActions[act] == null) {
+							nbPatchActions[act] = 0;
+						}
+						nbPatchActions[act]++;
+					}
+
+					for (var p in patterns) {
+						var pat = patterns[p];
+						if (nbPatchPatterns[pat] == null) {
+							nbPatchPatterns[pat] = 0;
+						}
+						nbPatchPatterns[pat]++;
+					}
+				}
+
+				var nbPatchActionsLD =  getLabelData(nbPatchActions);
+				new Chart(document.getElementById("bugPerAction").getContext('2d'), {
+					type: 'horizontalBar',
+					data: {
+						labels: nbPatchActionsLD.labels,
+						datasets: [{
+							label: '# of Repair Actions',
+							data: nbPatchActionsLD.data,
+							backgroundColor: '#5A6B7D',
+							borderWidth: 0
+						}]
+					},
+				});
+
+				var nbPatchPatternsLD = getLabelData(nbPatchPatterns);
+				new Chart(document.getElementById("bugPerPattern").getContext('2d'), {
+					type: 'horizontalBar',
+					data: {
+						labels: nbPatchPatternsLD.labels,
+						datasets: [{
+							label: '# of Repair Patterns',
+							data: nbPatchPatternsLD.data,
+							backgroundColor: '#5A6B7D',
+							borderWidth: 0
+						}]
+					},
+				});
+
+				var nbDistributionActionsLD = getLabelData(nbDistributionActions, false);
+				new Chart(document.getElementById("distributionAction").getContext('2d'), {
+					type: 'line',
+					data: {
+						labels: nbDistributionActionsLD.labels,
+						datasets: [{
+							label: 'Distribution of the number of actions per bug',
+							data: nbDistributionActionsLD.data,
+							backgroundColor: '#5A6B7D',
+							borderWidth: 0
+						}]
+					},
+				});
+
+				var nbDistributionPatternsLD = getLabelData(nbDistributionPatterns, false);
+				new Chart(document.getElementById("distributionPattern").getContext('2d'), {
+					type: 'line',
+					data: {
+						labels: nbDistributionPatternsLD.labels,
+						datasets: [{
+							label: 'Distribution of the number of patterns per bug',
+							data: nbDistributionPatternsLD.data,
+							backgroundColor: '#5A6B7D',
+							borderWidth: 0
+						}]
+					},
+				});
+
+				for (var p in classifications['Repair Patterns']) {
+					var pats = classifications['Repair Patterns'][p];
+					if (p != "Other") {
+						pats = {};
+						pats[p] = 0;
+					}
+					for (var sp in pats) {
+						var parent = document.getElementById("canvass")
+						var parentCanvas = document.createElement("div");
+						parentCanvas.className = "grid-chart";
+
+						var canvas = document.createElement("canvas");
+						canvas.width = 200;
+						canvas.height = 200;
+
+						var nbAction = {};
+						for (var a in classifications['Repair Actions']) {
+							if (nbAction[a] == null) {
+								nbAction[a] = 0;
+							}
+						}
+						parentCanvas.appendChild(canvas);
+						parent.appendChild(parentCanvas);
+
+						var cPatterns = classifications['Repair Patterns'][p];
+						if (p == "Other") {
+							cPatterns = {};
+							cPatterns[sp] = 0;
+						}
+						for (var s in cPatterns) {
+							var bugsS = getBugWith(s);
+							for (var i in bugsS) {
+								var bug = bugsS[i];
+								var actions = getActionPattern('Repair Actions', bug);
+								for (var a in actions) {
+									var act = actions[a];
+									nbAction[getParentLabel(act)] ++;
+								}
+							}
+						}
+
+						var nbActionLD = getLabelData(nbAction, false);
+						new Chart(canvas.getContext('2d'), {
+							type: 'radar',
+							data: {
+								labels: nbActionLD.labels,
+							    datasets: [{
+							    	label: sp,
+							        data: nbActionLD.data,
+							        backgroundColor: '#5A6B7D',
+							        pointRadius: 0
+							    }]
+							},
+						});
+					}
+				}
+				
+			});
+		</script>
+
+		<style>
+			#wrapper {
+				padding: 0;
+			}
+			@media(min-width:768px) {
+    			.navbar-header {
+    				left: 0px;
+    				padding-left: 10vw;
+    			}
+    		}
+    		#page-wrapper {
+    			position: relative;
+    			width:80vw;
+    			padding-top: 50px;
+				margin: auto;
+    		}
+			.chart-container {
+				position: relative;
+				width:80vw;
+				margin: auto;
+			}
+			.grid-chart {
+				width: 380px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="navbar-header">
+					<h2>Defects4J Dissection Charts 
+					<a href="http://program-repair.org/defects4j-dissection/"><i class="fa fa-table" aria-hidden="true"></i></a>
+					<a href="https://github.com/program-repair/defects4j-dissection"><i class="fa fa-github" aria-hidden="true"></i></a></h2>
+				</div>
+			</nav>
+			<div id="page-wrapper">
+				<h2>Number of bug per action</h2>
+				<div class="chart-container">
+					<canvas id="bugPerAction" width="400" height="200"></canvas>
+				</div>
+				
+				<h2>Number of bug per pattern</h2>
+				<div class="chart-container">
+					<canvas id="bugPerPattern" width="400" height="200"></canvas>
+				</div>
+				
+				<h2>Distribution of the number of actions by bug</h2>
+				<div class="chart-container">
+					<canvas id="distributionAction" width="400" height="200"></canvas>
+				</div>
+				
+				<h2>Distribution of the number of patterns by bug</h2>
+				<div class="chart-container">
+					<canvas id="distributionPattern" width="400" height="200"></canvas>
+				</div>
+				
+				<h2>Composition of the repair patterns in terms of repair actions.</h2>
+				<div id="canvass"></div>
+			</div>
+		</div>
+	</body>
+</html>
