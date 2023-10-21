@@ -1,0 +1,328 @@
+/* base */
+
+* {
+    font-family: IranSans, sans-serif;
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+    border: none;
+  }
+  
+  input,
+  select,
+  textarea,
+  button {
+    outline: none;
+    border: none;
+  }
+  
+  div {
+    border: none;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  /*  */
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(255, 255, 255);
+  }
+  
+  /*  */
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auto-flex {
+    flex: auto;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .full-height {
+    height: 100%;
+  }
+  
+  .min-height-full {
+    min-height: 100%;
+  }
+  
+  .auto-height {
+    height: auto;
+  }
+  
+  .auto-width {
+    width: auto;
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .fixed {
+    position: fixed;
+  }
+  
+  .center {
+    align-self: center;
+  }
+  
+  .end-column {
+    margin-top: auto;
+  }
+  
+  .end-row {
+    margin-left: auto;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .inline {
+    display: inline;
+  }
+  
+  .unvisible {
+    opacity: 0;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  /*  */
+  
+  .z-1 {
+    z-index: 1;
+  }
+  
+  .z-1 {
+    z-index: 2;
+  }
+  
+  .z-3 {
+    z-index: 3;
+  }
+  
+  .z-4 {
+    z-index: 4;
+  }
+  
+  .height-5 {
+    height: 5px;
+  }
+  
+  .height-15 {
+    height: 15px;
+  }
+  
+  .height-41 {
+    height: 41px;
+  }
+  
+  .height-42 {
+    height: 42px;
+  }
+  
+  .height-50 {
+    height: 50px;
+  }
+  
+  .height-100 {
+    height: 100px;
+  }
+  
+  .height-200 {
+    height: 200px;
+  }
+  
+  .height-400 {
+    height: 400px;
+  }
+  
+  .height-100vh {
+    height: 100vh;
+  }
+  
+  .width-50 {
+    width: 50px;
+  }
+  
+  .width-100 {
+    width: 100px;
+  }
+  
+  .width-150 {
+    width: 150px;
+  }
+  
+  .width-200 {
+    width: 200px;
+  }
+  
+  .width-250 {
+    width: 250px;
+  }
+  
+  .width-400 {
+    width: 400px;
+  }
+  
+  .padding-15 {
+    padding: 15px;
+  }
+  
+  .padding-30 {
+    padding: 30px;
+  }
+  
+  .margin-right-250 {
+    margin-right: 250px;
+  }
+  
+  .border-radius-100 {
+    border-radius: 100%;
+  }
+  
+  .border-5 {
+    border: 5px;
+    border-style: solid;
+  }
+  
+  .transfor-100-0 {
+    transform: translate(100%, 0px);
+  }
+  
+  .transfor-100-200 {
+    transform: translate(100px, 200px);
+  }
+  
+  .transfor-0-0 {
+    transform: translate(0px, 0px);
+  }
+  
+  /*  */
+  
+  .red {
+    background-color: red;
+  }
+  
+  .blue {
+    background-color: blue;
+  }
+  
+  .yellow {
+    background-color: yellowgreen;
+  }
+  
+  .grey-white {
+    background-color: rgb(245, 245, 245);
+  }
+  
+  .white {
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .black {
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .small-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 2px;
+  }
+  
+  .self-black {
+    color: rgb(0, 0, 0);
+  }
+  
+  .self-white {
+    color: rgb(255, 255, 255);
+  }
+  
+  .self-dark-white {
+    color: rgb(200, 200, 200);
+  }
+  
+  .border-white {
+    border-color: rgb(255, 255, 255);
+  }
+  
+  .border-dark-white {
+    border-color: rgb(150, 150, 150);
+  }
+  
+  .white-shadow {
+    box-shadow: 0px 0px 50px rgba(125, 185, 250, 0.5);
+  }
+  
+  .normal-shadow {
+    box-shadow: 0px 0px 10px rgba(102, 102, 102, 0.1);
+  }
+  
+  .input-shadow {
+    box-shadow: 0px 0px 10px rgba(102, 102, 102, 0.1);
+  }
+  
+  .normal-radius {
+    border-radius: 10px;
+  }
+  
+  /*  */
+  
+  .transition-5 {
+    transition-duration: 0.5s;
+  }
+  
+  .transition-ease {
+    transition-timing-function: ease;
+  }
+  
+  .glow-white-on-hover:hover {
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+  }
+  
+  .border-white-on-hover:hover {
+    border-color: rgb(255, 255, 255);
+  }
+  
+
+

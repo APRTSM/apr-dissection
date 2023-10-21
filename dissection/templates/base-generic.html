@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+
+    <meta charset="UTF-8"></meta>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"></link>
+
+    <link rel="stylesheet" href="{% static 'style/w3-local.css' %}" ></link>
+
+
+    <link rel="stylesheet" href="{% static 'style/app.css' %}?version={% now 'U' %}"></link>
+
+    {% block links %}{% endblock links %}
+
+    <script src="{% static 'js/w3-local.js' %}"></script>
+
+    {% block scripts %}{% endblock scripts %}
+
+</head>
+
+<body class="w3-content grey" style="max-width: 1900px;">
+    <!-- Sidebar/menu -->
+
+    <nav class="w3-sidebar w3-bar-block w3-text-grey w3-collapse w3-top white" style="z-index:3; width:270px; font-weight:bold" id="mySidebar">
+        <div style="margin-left:15px">
+
+            {% block sidebar %}{% endblock sidebar %}
+        </div>
+    </nav>
+
+    <!-- Top menu on small screens -->
+
+
+
+    <header class="w3-container w3-top w3-hide-large w3-white w3-xlarge">
+        <span class="w3-left w3-padding black-text">{{ title }}</span>
+
+        <a href="javascript:void(0)" class="w3-right w3-button black-text" onclick="w3_open()">☰</a>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+
+    <div class="w3-main" style="margin-left:270px">
+        <h1 class="black white-text" style="margin: 0; padding-left: 11px;">{{ title }}</h1>
+
+        {% block content %}{% endblock content %}
+    
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

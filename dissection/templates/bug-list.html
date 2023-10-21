@@ -1,0 +1,95 @@
+{% extends "base-generic.html" %}
+{% load static %}
+{% load extras %}
+
+
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'style/checkbox.css' %}"></link>
+{% endblock links %}
+
+
+
+{% block sidebar %}
+<br>
+<div>
+  <div class="large black-text">
+      Filters
+  </div>
+  <br>
+
+  {% for sub_class_name, sub_class in classes.items %}
+  <div class="black-text thin large">
+    • {{ sub_class_name }}
+  </div>
+  
+  <div>
+  {% for category_name, category in sub_class.items %}
+    <div class="black-text thin" style="margin-left: 10px;">
+      ○ {{ category_name }}
+    </div>
+    
+    <div>
+    {% for sub_category_name, sub_category in category.items %}
+      <a href="" class="thin">
+        <label>
+          <input type="checkbox" name="key" value="value" />
+          <span class="grey-text">{{ sub_category_name }}</span>
+        </label>
+      </a>
+    
+    {% endfor %}
+    </div>
+    
+  {% endfor %}
+  </div>
+  <br>
+
+  {% endfor %}
+</div>
+
+{% endblock sidebar %}
+
+
+
+{% block content %}
+<div>
+  <table class="grey-text thin">
+    <tr class="black-text">
+      <th class="">Bug Id</th>
+      <th class=""># Files</th>
+      <th class=""># Classes</th>
+      <th class=""># Methods</th>
+      <th class=""># Lines</th>
+      <th class=""># Added</th>
+      <th class=""># Removed</th>
+      <th class=""># Modified</th>
+      <th class=""># Chunks</th>
+      <th class=""># Failing Tests</th>
+      <th class=""># Repeat Actions</th>
+      <th class=""># Repair Patterns</th>
+      <th class="">First Exception</th>
+
+    </tr>
+    {% for defect in defects %}
+    <tr>
+        <td><a href="{% url 'dissection:bug-detail' defect.project defect.bugId  %}">{{ defect.project }} {{ defect.bugId }}</a></td>
+        <td>{{ defect.metrics.files }}</td>
+        <td>{{ defect.metrics.classes }}</td>
+        <td>{{ defect.metrics.methods }}</td>
+        <td>{{ defect.metrics.sizeInLines }}</td>
+        <td>{{ defect.metrics.linesAdd }}</td>
+        <td>{{ defect.metrics.linesRem}}</td>
+        <td>{{ defect.metrics.linesMod}}</td>
+        <td>{{ defect.metrics.chunks }}</td>
+  
+        <td>{{ defect.failingTests|length}}</td>
+        <td>{{ defect.repairActions|length}}</td>
+        <td>{{ defect.repairPatterns|length }}</td>
+        <td>{% with defect.failingTests.0.error|split:"." as errors %}{{ errors|take_last }}{% endwith%}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock content %}

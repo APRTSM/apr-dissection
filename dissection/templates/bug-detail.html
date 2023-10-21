@@ -1,0 +1,87 @@
+<!-- @format -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+
+    <script src="{% static 'js/bug-detail.js' %}"></script>
+  </head>
+
+  <script>
+    var humanPatchDiff = `{{ bug.diff }}`;
+    var diffsAndContributors = [
+      {% for patch in patches %}[`{{ patch.diff }}`, "{{ patch.patchContributor }}"],{% endfor %}
+    ];
+  </script>
+
+  <body
+    class="w3-content w3-container"
+    style="max-width: 1200px; margin-top: 100px; margin-bottom: 100px">
+    <h3>{{ bug_project_and_id }}</h3>
+
+    <br />
+    <br />
+
+    <div class="w3-large">• Human Patch</div>
+    <br />
+    <div id="myDiffElement"></div>
+
+    <br />
+    <br />
+
+    {% for patch in patches %}
+
+    <div class="w3-large">• {{ patch.patchContributor }}</div>
+    <br />
+    <div id="{{ patch.patchContributor }}"></div>
+
+    <br />
+    <br />
+
+    {% endfor %}
+
+    <div class="w3-large">• Add a New Patch</div>
+    <br />
+    <div class="w3-container w3-centered" style="max-width: 500px">
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input
+          class="w3-input"
+          id="contributor-name-input"
+          type="text"
+          name="contributor"
+          maxlength="100"
+          placeholder="Contributor Name"
+          required />
+        <br />
+        <label for="diff-file">Diff File:</label>
+        <input class="w3-input" type="file" id="diff-file" name="diff" />
+        <br />
+        <input class="w3-input" type="submit" value="Submit" />
+        <br />
+        <br />
+      </form>
+    </div>
+    <br />
+    <br />
+  </body>
+</html>
