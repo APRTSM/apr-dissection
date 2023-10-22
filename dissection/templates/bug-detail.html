@@ -29,7 +29,7 @@
   <script>
     var humanPatchDiff = `{{ bug.diff }}`;
     var diffsAndContributors = [
-      {% for patch in patches %}[`{{ patch.diff }}`, "{{ patch.patchContributor }}"],{% endfor %}
+      {% for patch in patches %}[`{{ patch.diff }}`, "{{ patch.contributor }}"],{% endfor %}
     ];
   </script>
 
@@ -50,9 +50,9 @@
 
     {% for patch in patches %}
 
-    <div class="w3-large">• {{ patch.patchContributor }}</div>
+    <div class="w3-large">• {{ patch.contributor }}</div>
     <br />
-    <div id="{{ patch.patchContributor }}"></div>
+    <div id="{{ patch.contributor }}"></div>
 
     <br />
     <br />

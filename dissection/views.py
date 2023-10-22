@@ -33,16 +33,24 @@ class BugDetail(View):
 
         bug_project_and_id = kwargs['bug_project'] + '_' + str(kwargs['bug_id'])
 
-        with open('./dissection/data/dynamic/defects4j-patches.json') as file:
-            patches = json.load(file)
+        patches = []
 
-        if bug_project_and_id not in patches:
-            patches[bug_project_and_id] = []
+        with open('./dissection/data/static/apr-efficiency-pfl.json') as file:
+            dataset_dictionary = json.load(file)
+            
+            if bug_project_and_id in dataset_dictionary:
+                patches += dataset_dictionary[bug_project_and_id]
+
+        with open('./dissection/data/dynamic/defects4j-patches.json') as file:
+            dataset_dictionary = json.load(file)
+            
+            if bug_project_and_id in dataset_dictionary:
+                patches += dataset_dictionary[bug_project_and_id]
 
         return render(request, self.template_name, {
             "bug": bug, 
             "bug_project_and_id": bug_project_and_id, 
-            "patches": patches[bug_project_and_id]
+            "patches": patches
         })
     
     def post(self, request, *args, **kwargs):
@@ -57,7 +65,7 @@ class BugDetail(View):
                 patches[bug_project_and_id] = []
 
             patches[bug_project_and_id].append({
-                "patchContributor": contributor_name,
+                "contributor": contributor_name,
                 "diff": diff
             })
             file.seek(0)
