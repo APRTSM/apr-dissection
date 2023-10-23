@@ -73,7 +73,7 @@
     </tr>
     {% for defect in defects %}
     <tr>
-        <td><a href="{% url 'dissection:bug-detail' defect.project defect.bugId  %}">{{ defect.project }} {{ defect.bugId }}</a></td>
+        <td><a href="{% url 'dissection:bug-detail' defect.name %}">{{ defect.project }} {{ defect.bugId }}</a></td>
         <td>{{ defect.metrics.files }}</td>
         <td>{{ defect.metrics.classes }}</td>
         <td>{{ defect.metrics.methods }}</td>

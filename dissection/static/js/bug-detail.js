@@ -25,9 +25,9 @@ $(document).ready(function () {
   diffsAndContributors.forEach(generateDiff);
   function generateDiff(value, index, array) {
     diffFile = value[0];
-    contributor = value[1];
+    id = value[1];
     var diffString = diffFile;
-    var targetElement = document.getElementById(contributor);
+    var targetElement = document.getElementById(id);
     var configuration = {
       drawFileList: false,
       fileListToggle: false,

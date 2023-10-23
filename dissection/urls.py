@@ -6,5 +6,5 @@ app_name = 'dissection'
 
 urlpatterns = [
     path("", views.BugsList.as_view(), name="bug-list"),
-    path("<bug_project>/<int:bug_id>/", views.BugDetail.as_view(), name="bug-detail"),
+    path("<bug_name>/", views.BugDetail.as_view(), name="bug-detail"),
 ]
