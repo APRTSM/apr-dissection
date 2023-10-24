@@ -7,11 +7,11 @@ $(document).ready(function () {
     drawFileList: false,
     fileListToggle: false,
     fileListStartVisible: false,
-    fileContentToggle: false,
+    fileContentToggle: true,
     matching: "lines",
     outputFormat: "line-by-line",
-    synchronisedScroll: true,
-    highlight: true,
+    synchronisedScroll: false,
+    highlight: false,
     renderNothingWhenEmpty: false,
   };
   var diff2htmlUi = new Diff2HtmlUI(
@@ -32,11 +32,11 @@ $(document).ready(function () {
       drawFileList: false,
       fileListToggle: false,
       fileListStartVisible: false,
-      fileContentToggle: false,
+      fileContentToggle: true,
       matching: "lines",
       outputFormat: "line-by-line",
-      synchronisedScroll: true,
-      highlight: true,
+      synchronisedScroll: false,
+      highlight: false,
       renderNothingWhenEmpty: false,
     };
     var diff2htmlUi = new Diff2HtmlUI(targetElement, diffString, configuration);

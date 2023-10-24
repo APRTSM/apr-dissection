@@ -17,7 +17,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -197,9 +197,11 @@\n    \n-        if (fa * fb >= 0.0 ) {\n-            throw new ConvergenceException(\n-                      \"number of iterations={0}, maximum iterations={1}, \" +\n-                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n-                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n-                      numIterations, maximumIterations, initial,\n-                      lowerBound, upperBound, a, b, fa, fb);\n+        if (false) {\n+            if (fa * fb >= 0.0 ) {\n+                throw new ConvergenceException(\n+                \"number of iterations={0}, maximum iterations={1}, \" +\n+                \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n+                \"final b value={6}, f(a)={7}, f(b)={8}\",\n+                numIterations, maximumIterations, initial,\n+                lowerBound, upperBound, a, b, fa, fb);\n+            }\n         }\n",
+      "diff": "--- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n+++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java\n@@ -197,9 +197,11 @@\n    \n-        if (fa * fb >= 0.0 ) {\n-            throw new ConvergenceException(\n-                      \"number of iterations={0}, maximum iterations={1}, \" +\n-                      \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n-                      \"final b value={6}, f(a)={7}, f(b)={8}\",\n-                      numIterations, maximumIterations, initial,\n-                      lowerBound, upperBound, a, b, fa, fb);\n+        if (false) {\n+            if (fa * fb >= 0.0 ) {\n+                throw new ConvergenceException(\n+                \"number of iterations={0}, maximum iterations={1}, \" +\n+                \"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, \" +\n+                \"final b value={6}, f(a)={7}, f(b)={8}\",\n+                numIterations, maximumIterations, initial,\n+                lowerBound, upperBound, a, b, fa, fb);\n+            }\n         }\n",
       "correctness": "P",
       "id": "fc0a6cbefa1645669e55cd3db7d0836c"
     },
@@ -316,7 +316,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java\n+++ b/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java\n@@ -1796,4 +1796,6 @@\n         CategoryDataset dataset = this.plot.getDataset(index);\n-        if (dataset != null) {\n-            return result;\n+        if (false) {\n+            if (dataset != null) {\n+                return result;\n+            }\n         }",
+      "diff": "--- a/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java\n+++ b/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java\n@@ -1796,4 +1796,6 @@\n         CategoryDataset dataset = this.plot.getDataset(index);\n-        if (dataset != null) {\n-            return result;\n+        if (false) {\n+            if (dataset != null) {\n+                return result;\n+            }\n         }",
       "correctness": "P",
       "id": "b589e1d60fff4fa5aec25121a19c2142"
     },
@@ -416,7 +416,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -187,3 +187,5 @@\n                     if (x == x1) {\n-                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        if (false) {\n+                            x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        }\n                         f0 = computeObjectiveValue(x0);\n",
+      "diff": "--- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n+++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java\n@@ -187,3 +187,5 @@\n                     if (x == x1) {\n-                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        if (false) {\n+                            x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));\n+                        }\n                         f0 = computeObjectiveValue(x0);\n",
       "correctness": "C",
       "id": "ddc6681a9024486982bf5e7d99e2414c"
     },
@@ -655,7 +655,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java\n@@ -150,3 +150,5 @@\n                 }\n-                return minRow;\n+                if (false) {\n+                    return minRow;\n+                }\n         }\n",
+      "diff": "--- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java\n+++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexSolver.java\n@@ -150,3 +150,5 @@\n                 }\n-                return minRow;\n+                if (false) {\n+                    return minRow;\n+                }\n         }\n",
       "correctness": "P",
       "id": "d4fac84f3fdc4377a9ac39063207560d"
     },
@@ -1491,7 +1491,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,6 +451,3 @@\n                 case 'L' :\n-                    if (dec == null\n-                        && exp == null\n-                        && isDigits(numeric.substring(1))\n-                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n+                    if (exp == dec) {\n                         try {\n@@ -461,3 +458,3 @@\n                         return createBigInteger(numeric);\n-\n+                        \n                     }\n",
+      "diff": "--- a/src/java/org/apache/commons/lang/math/NumberUtils.java\n+++ b/src/java/org/apache/commons/lang/math/NumberUtils.java\n@@ -451,6 +451,3 @@\n                 case 'L' :\n-                    if (dec == null\n-                        && exp == null\n-                        && isDigits(numeric.substring(1))\n-                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {\n+                    if (exp == dec) {\n                         try {\n@@ -461,3 +458,3 @@\n                         return createBigInteger(numeric);\n-\n+                        \n                     }\n",
       "correctness": "P",
       "id": "5ece21bef14049b2a10ac151ff3ccee0"
     },
@@ -1653,7 +1653,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java\n+++ b/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java\n@@ -1542,20 +1542,22 @@\n                 // approximate contribution to norm squared from i < nn-2.\n-                if (end - start > 2) {\n-                    b2 = work[nn - 13] / work[nn - 15];\n-                    a2 = a2 + b2;\n-                    for (int i4 = nn - 17; i4 >= 4 * start + 2 + pingPong; i4 -= 4) {\n-                        if (b2 == 0.0) {\n-                            break;\n-                        }\n-                        b1 = b2;\n-                        if (work[i4]  >  work[i4 - 2]) {\n-                            return;\n-                        }\n-                        b2 = b2 * (work[i4] / work[i4 - 2]);\n+                if (false) {\n+                    if (end - start > 2) {\n+                        b2 = work[nn - 13] / work[nn - 15];\n                         a2 = a2 + b2;\n-                        if (100 * Math.max(b2, b1) < a2 || cnst1 < a2)  {\n-                            break;\n+                        for (int i4 = nn - 17; i4 >= 4 * start + 2 + pingPong; i4 -= 4) {\n+                            if (b2 == 0.0) {\n+                                break;\n+                            }\n+                            b1 = b2;\n+                            if (work[i4]  >  work[i4 - 2]) {\n+                                return;\n+                            }\n+                            b2 = b2 * (work[i4] / work[i4 - 2]);\n+                            a2 = a2 + b2;\n+                            if (100 * Math.max(b2, b1) < a2 || cnst1 < a2)  {\n+                                break;\n+                            }\n                         }\n+                        a2 = cnst3 * a2;\n                     }\n-                    a2 = cnst3 * a2;\n                 }\n",
+      "diff": "--- a/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java\n+++ b/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java\n@@ -1542,20 +1542,22 @@\n                 // approximate contribution to norm squared from i < nn-2.\n-                if (end - start > 2) {\n-                    b2 = work[nn - 13] / work[nn - 15];\n-                    a2 = a2 + b2;\n-                    for (int i4 = nn - 17; i4 >= 4 * start + 2 + pingPong; i4 -= 4) {\n-                        if (b2 == 0.0) {\n-                            break;\n-                        }\n-                        b1 = b2;\n-                        if (work[i4]  >  work[i4 - 2]) {\n-                            return;\n-                        }\n-                        b2 = b2 * (work[i4] / work[i4 - 2]);\n+                if (false) {\n+                    if (end - start > 2) {\n+                        b2 = work[nn - 13] / work[nn - 15];\n                         a2 = a2 + b2;\n-                        if (100 * Math.max(b2, b1) < a2 || cnst1 < a2)  {\n-                            break;\n+                        for (int i4 = nn - 17; i4 >= 4 * start + 2 + pingPong; i4 -= 4) {\n+                            if (b2 == 0.0) {\n+                                break;\n+                            }\n+                            b1 = b2;\n+                            if (work[i4]  >  work[i4 - 2]) {\n+                                return;\n+                            }\n+                            b2 = b2 * (work[i4] / work[i4 - 2]);\n+                            a2 = a2 + b2;\n+                            if (100 * Math.max(b2, b1) < a2 || cnst1 < a2)  {\n+                                break;\n+                            }\n                         }\n+                        a2 = cnst3 * a2;\n                     }\n-                    a2 = cnst3 * a2;\n                 }\n",
       "correctness": "P",
       "id": "649c7ca12ef04b8ca41ed4f4cd5e92fb"
     },
@@ -2294,7 +2294,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/math/analysis/BrentSolver.java\n+++ b/src/java/org/apache/commons/math/analysis/BrentSolver.java\n@@ -137,9 +137,9 @@\n         double sign = yMin * yMax;\n-        if (sign >= 0) {\n+        if (this.functionValueAccuracy <= sign) {\n             // check if either value is close to a zero\n-                // neither value is close to zero and min and max do not bracket root.\n-                throw new IllegalArgumentException\n-                (\"Function values at endpoints do not have different signs.\" +\n-                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n-                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n+            // neither value is close to zero and min and max do not bracket root.\n+            throw new IllegalArgumentException\n+            (\"Function values at endpoints do not have different signs.\" +\n+            \"  Endpoints: [\" + min + \",\" + max + \"]\" +\n+            \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n         } else {\n",
+      "diff": "--- a/src/java/org/apache/commons/math/analysis/BrentSolver.java\n+++ b/src/java/org/apache/commons/math/analysis/BrentSolver.java\n@@ -137,9 +137,9 @@\n         double sign = yMin * yMax;\n-        if (sign >= 0) {\n+        if (this.functionValueAccuracy <= sign) {\n             // check if either value is close to a zero\n-                // neither value is close to zero and min and max do not bracket root.\n-                throw new IllegalArgumentException\n-                (\"Function values at endpoints do not have different signs.\" +\n-                        \"  Endpoints: [\" + min + \",\" + max + \"]\" + \n-                        \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n+            // neither value is close to zero and min and max do not bracket root.\n+            throw new IllegalArgumentException\n+            (\"Function values at endpoints do not have different signs.\" +\n+            \"  Endpoints: [\" + min + \",\" + max + \"]\" +\n+            \"  Values: [\" + yMin + \",\" + yMax + \"]\");\n         } else {\n",
       "correctness": "P",
       "id": "4ceb69cd43784714b5a1de48a7925d6c"
     },
@@ -2317,7 +2317,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/lang/time/StopWatch.java\n+++ b/src/java/org/apache/commons/lang/time/StopWatch.java\n@@ -117,3 +117,5 @@\n         }\n-            stopTime = System.currentTimeMillis();\n+            if (this.runningState == 1) {\n+                stopTime = System.currentTimeMillis();\n+            }\n         this.runningState = STATE_STOPPED;\n",
+      "diff": "--- a/src/java/org/apache/commons/lang/time/StopWatch.java\n+++ b/src/java/org/apache/commons/lang/time/StopWatch.java\n@@ -117,3 +117,5 @@\n         }\n-            stopTime = System.currentTimeMillis();\n+            if (this.runningState == 1) {\n+                stopTime = System.currentTimeMillis();\n+            }\n         this.runningState = STATE_STOPPED;\n",
       "correctness": "C",
       "id": "0dbfc016e53b4c59827a9e318d0de9f6"
     },
@@ -2340,7 +2340,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -135,3 +135,3 @@\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if ((Boolean) tree.getAttribute()) {\n+            if (false) {\n                 // the instance covers the whole space\n",
+      "diff": "--- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n+++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java\n@@ -135,3 +135,3 @@\n             final BSPTree<Euclidean2D> tree = getTree(false);\n-            if ((Boolean) tree.getAttribute()) {\n+            if (false) {\n                 // the instance covers the whole space\n",
       "correctness": "P",
       "id": "2e90f3345e6e4d78b3f8ce43e31cc55e"
     },
@@ -2363,7 +2363,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/lang/StringEscapeUtils.java\n+++ b/src/java/org/apache/commons/lang/StringEscapeUtils.java\n@@ -243,3 +243,5 @@\n                     case '/' :\n-                            out.write('\\\\');\n+                            if (escapeSingleQuote) {\n+                                out.write('\\\\');\n+                            }\n                         out.write('/');\n",
+      "diff": "--- a/src/java/org/apache/commons/lang/StringEscapeUtils.java\n+++ b/src/java/org/apache/commons/lang/StringEscapeUtils.java\n@@ -243,3 +243,5 @@\n                     case '/' :\n-                            out.write('\\\\');\n+                            if (escapeSingleQuote) {\n+                                out.write('\\\\');\n+                            }\n                         out.write('/');\n",
       "correctness": "C",
       "id": "77269916aea64482be1d1cfc9d07afee"
     },
@@ -2393,7 +2393,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -377,4 +377,3 @@\n         if (\n-            source.substring(startIndex, endIndex).compareTo(\n-            getImaginaryCharacter()) != 0) {\n+            startIndex == source.length()) {\n             // set index back to initial, error index should be the start index\n",
+      "diff": "--- a/src/java/org/apache/commons/math/complex/ComplexFormat.java\n+++ b/src/java/org/apache/commons/math/complex/ComplexFormat.java\n@@ -377,4 +377,3 @@\n         if (\n-            source.substring(startIndex, endIndex).compareTo(\n-            getImaginaryCharacter()) != 0) {\n+            startIndex == source.length()) {\n             // set index back to initial, error index should be the start index\n",
       "correctness": "P",
       "id": "ca69e0dc7fbf409aa5d870dcfff7632c"
     }
@@ -2402,7 +2402,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -338,3 +338,5 @@\n                     if (tableau.getEntry(basicRow, j) == 1) {\n-                         coefficients[i] = 0;\n+                         if (mostNegative != coefficients[0]) {\n+                             coefficients[i] = 0;\n+                         }\n                     }\n",
+      "diff": "--- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n+++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java\n@@ -338,3 +338,5 @@\n                     if (tableau.getEntry(basicRow, j) == 1) {\n-                         coefficients[i] = 0;\n+                         if (mostNegative != coefficients[0]) {\n+                             coefficients[i] = 0;\n+                         }\n                     }\n",
       "correctness": "P",
       "id": "3b2b0133625446f1ac7933fe7e45cda9"
     },
@@ -2460,7 +2460,7 @@
     {
       "name": "Patch_1_1",
       "contributor": "DynaMoth",
-      "diff": "a/src/java/org/apache/commons/lang/time/DurationFormatUtils.java\n+++ b/src/java/org/apache/commons/lang/time/DurationFormatUtils.java\n@@ -437,3 +437,5 @@\n             int newdiff = startValue - endValue;\n-            end.add( field, newdiff );\n+            if (false) {\n+                end.add( field, newdiff );\n+            }\n             return newdiff;\n",
+      "diff": "--- a/src/java/org/apache/commons/lang/time/DurationFormatUtils.java\n+++ b/src/java/org/apache/commons/lang/time/DurationFormatUtils.java\n@@ -437,3 +437,5 @@\n             int newdiff = startValue - endValue;\n-            end.add( field, newdiff );\n+            if (false) {\n+                end.add( field, newdiff );\n+            }\n             return newdiff;\n",
       "correctness": "P",
       "id": "c8f82598b2774deaa2d63738d6bfb3ea"
     },

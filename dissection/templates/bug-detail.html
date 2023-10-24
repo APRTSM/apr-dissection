@@ -23,43 +23,71 @@
 
     <script src="http://code.jquery.com/jquery.min.js"></script>
 
-    <script src="{% static 'js/bug-detail.js' %}"></script>
+    <script src="{% static 'js/bug-detail.js' %}?version={% now 'U' %}"></script>
   </head>
 
   <script>
-    var humanPatchDiff = `{{ bug.diff }}`;
+    var humanPatchDiff = `{{ defect.diff }}`;
     var diffsAndContributors = [
-      {% for patch in patches %}[`{{ patch.diff }}`, "{{ patch.id }}"],{% endfor %}
+      {% for patch in patches %}{% if patch.diff %}[`{{ patch.diff }}`, "{{ patch.id }}"],{% endif %}{% endfor %}
     ];
   </script>
 
   <body
     class="w3-content w3-container"
-    style="max-width: 1200px; margin-top: 100px; margin-bottom: 100px">
-    <h3>{{ defect.name }}</h3>
+    style="max-width: 1500px; margin-top: 100px; margin-bottom: 100px">
+    <h2>{{ defect.name }}</h2>
 
     <br />
     <br />
-
-    <div class="w3-large">• Human Patch</div>
     <br />
+
+    <div class="w3-xlarge" style="margin-bottom: 5px">• Human Patch</div>
     <div id="myDiffElement"></div>
 
     <br />
     <br />
 
-    {% for patch in patches %}
-
-    <div class="w3-large">• {{ patch.contributor }}</div>
-    <br />
+    {% for patch in patches %} {% if patch.diff %}
+    <div style="margin-bottom: 5px">
+      <span class="w3-xlarge">• {{ patch.contributor }}</span>
+      <span class="w3-margin-left w3-margin-right">{{ patch.name }}</span>
+    </div>
     <div id="{{ patch.id }}"></div>
+    {% if patch.correctness == 'C' %}
+    <span class="w3-margin-right w3-pale-green" style="padding: 5px"
+      >Correct</span
+    >
+    {% elif patch.correctness == 'P' %}
+    <span class="w3-margin-right w3-pale-yellow" style="padding: 5px"
+      >Plausible</span
+    >
+    {% endif %} {% comment %} <br />
+    <br />
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input
+        class="w3-input"
+        id="tag-name-{{ patch.id }}"
+        type="text"
+        name="tag-name-{{ patch.id }}"
+        maxlength="100"
+        placeholder="Tag Name"
+        required />
+      <br />
+      <input class="w3-input" type="submit" value="Submit" />
+      <br />
+    </form>
+    {% endcomment %}
 
     <br />
     <br />
+    <br />
+    <br />
 
-    {% endfor %}
+    {% endif %} {% endfor %}
 
-    <div class="w3-large">• Add a New Patch</div>
+    <div class="w3-xlarge">• Add a New Patch</div>
     <br />
     <div class="w3-container w3-centered" style="max-width: 500px">
       <form action="" method="post" enctype="multipart/form-data">
@@ -73,6 +101,23 @@
           placeholder="Contributor Name"
           required />
         <br />
+        <input
+          class="w3-input"
+          id="patch-name-input"
+          type="text"
+          name="name"
+          maxlength="100"
+          placeholder="Patch Name"
+          required />
+        <br />
+        <label for="correctness">Correctness:</label>
+        <select id="correctness" name="correctness">
+          <option value="A">Ambiguous</option>
+          <option value="P">Plausible</option>
+          <option value="C">Correct</option>
+        </select>
+        <br />
+        <br />
         <label for="diff-file">Diff File:</label>
         <input class="w3-input" type="file" id="diff-file" name="diff" />
         <br />
@@ -81,6 +126,7 @@
         <br />
       </form>
     </div>
+    <br />
     <br />
     <br />
   </body>
