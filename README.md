@@ -15,7 +15,7 @@
     - If the error `docker-compose not found` accured, install docker-compose.
   - If the container runs successfully, you may visit [the page](http://127.0.0.1:8000/dissection/).
  
-- 2)
+- 2) Not Using Docker
   - Requirements:
     - Python 3.10
   - Go to `apr-dissection/src/`
