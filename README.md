@@ -13,7 +13,7 @@
   - Go to `apr-dissection/`
   - Run `docker-compose up -d --build`
     - If the error `docker-compose not found` accured, install docker-compose.
-  - If the container runs successfully, you may visit [the page](http://127.0.0.1:8000/dissection/).
+  - If the container runs successfully, you may visit [the page](http://0.0.0.0:8000/dissection/).
  
 - ## 2) Not Using Docker
   - Requirements:
