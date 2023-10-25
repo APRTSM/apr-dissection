@@ -6,21 +6,22 @@
     <title>{% block title %}{% endblock title %}</title>
 
     <meta charset="UTF-8"></meta>
-
     <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
 
     <link rel="stylesheet" href="{% static 'style/w3-local.css' %}" ></link>
-
-
     <link rel="stylesheet" href="{% static 'style/app.css' %}?version={% now 'U' %}"></link>
 
     {% block links %}{% endblock links %}
 
-    <script src="{% static 'js/w3-local.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+
+    <script src="{% static 'js/w3-local.js' %}?version={% now 'U' %}"></script>
 
     {% block scripts %}{% endblock scripts %}
 
