@@ -1,5 +1,3 @@
-<!-- @format -->
-
 # APR-Dissection
 
 ## Shortcuts
@@ -20,5 +18,5 @@
     - Python 3.10
   - Go to `apr-dissection/src/`
   - Run `source init.sh`
-    - You may need to change the content of `apr-dissection/src/init.sh` file (e.g. using `python` instead of `python3`) but commands are straight forward.
+    - You may need to change the content of `apr-dissection/src/init.sh` file (e.g. using `python` instead of `python3`).
   - If the server runs successfully, you may visit [the page](http://127.0.0.1:8000/dissection/).
