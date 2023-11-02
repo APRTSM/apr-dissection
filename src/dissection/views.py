@@ -5,48 +5,47 @@ import uuid
 import json
 
 
+DATA_DIR = "./dissection/data/"
+
+
 class BugsList(View):
     template_name = "bug-list.html"
 
     def get(self, request, *args, **kwargs):    
-        with open('./dissection/data/static/original/defects4j-bugs.json') as file:
-            defects = json.load(file)
+        with open(DATA_DIR + "bugs.json") as file:
+            bugs = json.load(file)
 
-        with open('./dissection/data/static/classification.json') as file:
-            classes = json.load(file)
-        
-
-        return render(request, self.template_name, {"defects": defects, "classes": classes, "title": "Dissection"})
+        return render(request, self.template_name, {"bugs": bugs, "title": "Dissection"})
 
 
 class BugDetail(View):
     template_name = "bug-detail.html"
 
     def get(self, request, *args, **kwargs):    
-        with open('./dissection/data/static/original/defects4j-bugs.json') as file:
-            defects = json.load(file)
+        with open(DATA_DIR + "bugs.json") as file:
+            bugs = json.load(file)
 
-        for defect in defects:
-            if defect['name'] == kwargs['bug_name']:
+        for bug in bugs:
+            if bug['name'] == kwargs['bug_name']:
                 break
 
-        patches = []
+        selected_patches = []
 
-        with open('./dissection/data/static/original/apr-efficiency-pfl.json') as file:
-            dataset_dictionary = json.load(file)
+        with open(DATA_DIR + "patches.json") as file:
+            patches = json.load(file)
             
-            if defect['name'] in dataset_dictionary:
-                patches += dataset_dictionary[defect['name']]
 
-        with open('./dissection/data/dynamic/defects4j-patches.json') as file:
-            dataset_dictionary = json.load(file)
-            
-            if defect['name'] in dataset_dictionary:
-                patches += dataset_dictionary[defect['name']]
+        for patch in patches:
+            if patch["bugId"] == bug["id"]:
+                selected_patches.append(patch)
+
+        with open(DATA_DIR + "rules.json") as file:
+            rules = json.load(file)
 
         return render(request, self.template_name, {
-            "defect": defect, 
-            "patches": patches,
+            "bug": bug, 
+            "patches": selected_patches,
+            "rules": rules,
         })
     
     def post(self, request, *args, **kwargs):

@@ -27,7 +27,7 @@
   </head>
 
   <script>
-    var humanPatchDiff = `{{ defect.diff }}`;
+    var humanPatchDiff = `{{ bug.diff }}`;
     var diffsAndContributors = [
       {% for patch in patches %}{% if patch.diff %}[`{{ patch.diff }}`, "{{ patch.id }}"],{% endif %}{% endfor %}
     ];
@@ -36,7 +36,7 @@
   <body
     class="w3-content w3-container"
     style="max-width: 1500px; margin-top: 100px; margin-bottom: 100px">
-    <h2>{{ defect.name }}</h2>
+    <h2>{{ bug.name }}</h2>
 
     <br />
     <br />
@@ -50,35 +50,45 @@
 
     {% for patch in patches %} {% if patch.diff %}
     <div style="margin-bottom: 5px">
-      <span class="w3-xlarge">• {{ patch.contributor }}</span>
+      <span class="w3-xlarge">• {{ patch.tool }}</span>
       <span class="w3-margin-left w3-margin-right">{{ patch.name }}</span>
     </div>
     <div id="{{ patch.id }}"></div>
     {% if patch.correctness == 'C' %}
-    <span class="w3-margin-right w3-pale-green" style="padding: 5px"
-      >Correct</span
-    >
+    <span class="w3-margin-right w3-pale-green" style="padding: 5px">Correct</span>
+
+    {% for selected_rule in patch.rules %}
+      {% for rule in rules %}
+        {% if rule.id == selected_rule.ruleId %}
+          <span class="w3-margin-right w3-pale-blue" style="padding: 5px">{{ rule.name }}</span>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
     {% elif patch.correctness == 'P' %}
-    <span class="w3-margin-right w3-pale-yellow" style="padding: 5px"
-      >Plausible</span
-    >
-    {% endif %} {% comment %} <br />
+    <span class="w3-margin-right w3-pale-yellow" style="padding: 5px">Plausible</span>
+    {% endif %} <br />
     <br />
     <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
+      <label for="label-type" style="padding-right: 5px;">Label Type</label>
+      <select id="label-type" name="label-type">
+        <option value="C">Correctness</option>
+        <option value="F">Fault Localization</option>
+        <option value="R">Rule</option>
+      </select>
       <input
         class="w3-input"
-        id="tag-name-{{ patch.id }}"
+        id="Label-{{ patch.id }}"
         type="text"
-        name="tag-name-{{ patch.id }}"
+        name="Label-{{ patch.id }}"
         maxlength="100"
-        placeholder="Tag Name"
+        placeholder="Label"
         required />
       <br />
       <input class="w3-input" type="submit" value="Submit" />
       <br />
     </form>
-    {% endcomment %}
 
     <br />
     <br />
@@ -87,7 +97,7 @@
 
     {% endif %} {% endfor %}
 
-    <div class="w3-xlarge">• Add a New Patch</div>
+    {% comment %} <div class="w3-xlarge">• Add a New Patch</div>
     <br />
     <div class="w3-container w3-centered" style="max-width: 500px">
       <form action="" method="post" enctype="multipart/form-data">
@@ -125,7 +135,7 @@
         <br />
         <br />
       </form>
-    </div>
+    </div> {% endcomment %}
     <br />
     <br />
     <br />
