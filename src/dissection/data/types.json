@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Correctness",
+    "description": "",
+    "references": [
+      {
+        "referenceId": 0,
+        "fieldNames": []
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Validation Rule",
+    "description": "",
+    "references": [
+      {
+        "referenceId": 0,
+        "fieldNames": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Fault Localization",
+    "description": "",
+    "references": [
+      {
+        "referenceId": 0,
+        "fieldNames": []
+      }
+    ]
+  }
+]
