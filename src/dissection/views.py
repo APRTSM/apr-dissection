@@ -1,28 +1,29 @@
+import uuid
+import json
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
-import uuid
-import json
-
-
-DATA_DIR = "./dissection/data/"
+from django.conf import settings
 
 
 class BugsList(View):
     template_name = "bug-list.html"
 
     def get(self, request, *args, **kwargs):    
-        with open(DATA_DIR + "bugs.json") as file:
+        with open(settings.DATA_DIR + "bugs.json") as file:
             bugs = json.load(file)
+        
+        with open(settings.DATA_DIR + "benchmarks.json") as file:
+            benchmarks = json.load(file)
 
-        return render(request, self.template_name, {"bugs": bugs, "title": "Dissection"})
+        return render(request, self.template_name, {"bugs": bugs, "benchmarks": benchmarks, "title": "List of Bugs"})
 
 
 class BugDetail(View):
     template_name = "bug-detail.html"
 
     def get(self, request, *args, **kwargs):    
-        with open(DATA_DIR + "bugs.json") as file:
+        with open(settings.DATA_DIR + "bugs.json") as file:
             bugs = json.load(file)
 
         for bug in bugs:
@@ -31,7 +32,7 @@ class BugDetail(View):
 
         selected_patches = []
 
-        with open(DATA_DIR + "patches.json") as file:
+        with open(settings.DATA_DIR + "patches.json") as file:
             patches = json.load(file)
             
 
@@ -39,7 +40,7 @@ class BugDetail(View):
             if patch["bugId"] == bug["id"]:
                 selected_patches.append(patch)
 
-        with open(DATA_DIR + "rules.json") as file:
+        with open(settings.DATA_DIR + "rules.json") as file:
             rules = json.load(file)
 
         return render(request, self.template_name, {

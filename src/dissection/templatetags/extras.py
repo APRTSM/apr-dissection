@@ -1,15 +1,14 @@
+import json
 from django import template
+from utils import query
 
 
 register = template.Library()
 
+@register.simple_tag
+def replace(string, old, new):
+    return string.replace(old, new)
 
-@register.filter
-def split(value, arg):
-
-    return value.split(arg)
-
-@register.filter
-def take_last(value):
-
-    return value[-1]
+@register.simple_tag
+def get_object_by_id(dataset, id):
+    return query.get_object_by_id(dataset, id)

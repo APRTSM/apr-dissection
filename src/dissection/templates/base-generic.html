@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{{ title }}</title>
 
     <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
@@ -54,7 +54,7 @@
     <!-- !PAGE CONTENT! -->
 
     <div class="w3-main" style="margin-left:270px">
-        <h1 class="black white-text" style="margin: 0; padding-left: 11px;">{{ title }}</h1>
+        <h1 class="black white-text" style="margin: 0; padding: 5px; padding-left: 10px;">{{ title }}</h1>
 
         {% block content %}{% endblock content %}
     

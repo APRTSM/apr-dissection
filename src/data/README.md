@@ -20,6 +20,7 @@
 ```
 
 ## Bugs
+- Bug name should be unique
 ```
 {
   "id": 1,
