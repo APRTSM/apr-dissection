@@ -1,6 +1,6 @@
 import json
 from django import template
-from utils import query
+from ..utils import query
 
 
 register = template.Library()

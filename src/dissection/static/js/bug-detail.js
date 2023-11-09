@@ -1,27 +1,6 @@
 /** @format */
 
 $(document).ready(function () {
-  var diffStringMain = humanPatchDiff;
-  var targetElement = document.getElementById("myDiffElement");
-  var configuration = {
-    drawFileList: false,
-    fileListToggle: false,
-    fileListStartVisible: false,
-    fileContentToggle: true,
-    matching: "lines",
-    outputFormat: "line-by-line",
-    synchronisedScroll: false,
-    highlight: false,
-    renderNothingWhenEmpty: false,
-  };
-  var diff2htmlUi = new Diff2HtmlUI(
-    targetElement,
-    diffStringMain,
-    configuration
-  );
-  diff2htmlUi.draw();
-  diff2htmlUi.highlightCode();
-
   diffsAndContributors.forEach(generateDiff);
   function generateDiff(value, index, array) {
     diffFile = value[0];
@@ -43,4 +22,13 @@ $(document).ready(function () {
     diff2htmlUi.draw();
     diff2htmlUi.highlightCode();
   }
+
+  var selected_patches = [];
+
+  $(".checkbox").change(function(){
+    if (this.checked) {
+      selected_patches.push(this.id.replace("select-", ""));
+    }
+    $("#compare-button").attr("href", selected_patches.toString());
+  });
 });
