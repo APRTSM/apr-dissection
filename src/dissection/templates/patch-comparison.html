@@ -29,11 +29,7 @@
   <body class="w3-content w3-container" style="max-width: 1500px; margin-top: 100px; margin-bottom: 100px">
     <h2>{{ bug.name }}</h2>
 
-    <a class="bug-name" id="compare-button" href="">
-      <div class="w3-button w3-light-gray" style="position: fixed; top: 20px; right: 20px; padding: 10px; color: #000 ; border: none; cursor: pointer;">
-        Compare
-      </div>
-    </a>
+
 
     <br />
     <br />
@@ -43,8 +39,6 @@
     <div style="margin-bottom: 5px">
       <span class="w3-xlarge">• {{ patch.tool }}</span>
       <span class="w3-margin-left w3-margin-right">{{ patch.name }}</span>
-      <input type="checkbox" class="checkbox" id="select-{{ patch.id }}">
-      <label for="select-{{ patch.id }}">Select for Comparison</label>
     </div>
     <div id="{{ patch.id }}"></div>
 
@@ -77,46 +71,6 @@
     <br />
 
     {% endif %} {% endfor %}
-
-    {% comment %} <div class="w3-xlarge">• Add a New Patch</div>
-    <br />
-    <div class="w3-container w3-centered" style="max-width: 500px">
-      <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input
-          class="w3-input"
-          id="contributor-name-input"
-          type="text"
-          name="contributor"
-          maxlength="100"
-          placeholder="Contributor Name"
-          required />
-        <br />
-        <input
-          class="w3-input"
-          id="patch-name-input"
-          type="text"
-          name="name"
-          maxlength="100"
-          placeholder="Patch Name"
-          required />
-        <br />
-        <label for="correctness">Correctness:</label>
-        <select id="correctness" name="correctness">
-          <option value="A">Ambiguous</option>
-          <option value="P">Plausible</option>
-          <option value="C">Correct</option>
-        </select>
-        <br />
-        <br />
-        <label for="diff-file">Diff File:</label>
-        <input class="w3-input" type="file" id="diff-file" name="diff" />
-        <br />
-        <input class="w3-input" type="submit" value="Submit" />
-        <br />
-        <br />
-      </form>
-    </div> {% endcomment %}
     <br />
     <br />
     <br />

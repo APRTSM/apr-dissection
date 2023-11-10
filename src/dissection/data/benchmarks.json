@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Defects4J",
+    "description": "",
+    "references": [
+      {
+        "referenceId": 1,
+        "fieldNames": []
+      },
+      {
+        "referenceId": 0,
+        "fieldNames": ["description", "references"]
+      }
+    ]
+  }
+]

@@ -1,97 +1,58 @@
-{% extends "base-generic.html" %}
-{% load static %}
-{% load extras %}
+<!-- @format -->
 
+{% extends "base-generic.html" %} 
+
+{% load static %} 
+{% load extras %} 
 
 
 {% block scripts %}
+
 <script src="{% static 'js/bug-list.js' %}?version={% now 'U' %}"></script>
-{% endblock scripts %}
+
+{% endblock scripts %} {% block sidebar %}
 
 
-
-{% block sidebar %}
-<br>
+<br />
 <div>
-  <div class="large black-text">
-      Filters
-  </div>
-  <br>
+  <div class="large black-text">Filters</div>
+  <br />
 
-  {% for sub_class_name, sub_class in classes.items %}
-  <div class="black-text thin large">
-    • {{ sub_class_name }}
-  </div>
-  
+  <div class="black-text thin large">• Datasets</div>
   <div>
-  {% for category_name, category in sub_class.items %}
-    <div class="black-text thin" style="margin-left: 10px;">
-      ○ {{ category_name }}
-    </div>
-    
+    <div class="black-text thin" style="margin-left: 10px">○ Java</div>
     <div>
-    {% for sub_category_name in category %}
       <a href="" class="thin">
         <label>
           <input type="checkbox" name="key" value="value" />
-          <span class="grey-text">{{ sub_category_name }}</span>
+          <span class="grey-text">Defects4J</span>
         </label>
       </a>
-    
-    {% endfor %}
     </div>
-    
-  {% endfor %}
+    <div class="black-text thin" style="margin-left: 10px">○ Python</div>
+    <div></div>
   </div>
-  <br>
-
-  {% endfor %}
+  <br />
 </div>
 
-{% endblock sidebar %}
+{% endblock sidebar %} {% block content %}
 
-
-
-{% block content %}
 <div>
   <div id="bug-list">
     <table class="grey-text thin">
       <tr class="black-text">
-        <th class="">Bug Id</th>
-        <th class=""># Files</th>
-        <th class=""># Classes</th>
-        <th class=""># Methods</th>
-        <th class=""># Lines</th>
-        <th class=""># Added</th>
-        <th class=""># Removed</th>
-        <th class=""># Modified</th>
-        <th class=""># Chunks</th>
-        <th class=""># Failing Tests</th>
-        <th class=""># Repeat Actions</th>
-        <th class=""># Repair Patterns</th>
-        <th class="">First Exception</th>
-
+        <th class="">Name</th>
+        <th class="">Benchmark</th>
       </tr>
 
-      {% for defect in defects %}
+      {% for bug in bugs %}
       <tr class="bug">
-          <td><a class="bug-name" href="{% url 'dissection:bug-detail' defect.name %}">{{ defect.project }} {{ defect.bugId }}</a></td>
-          <td>{{ defect.metrics.files }}</td>
-          <td>{{ defect.metrics.classes }}</td>
-          <td>{{ defect.metrics.methods }}</td>
-          <td>{{ defect.metrics.sizeInLines }}</td>
-          <td>{{ defect.metrics.linesAdd }}</td>
-          <td>{{ defect.metrics.linesRem}}</td>
-          <td>{{ defect.metrics.linesMod}}</td>
-          <td>{{ defect.metrics.chunks }}</td>
-    
-          <td>{{ defect.failingTests|length}}</td>
-          <td>{{ defect.repairActions|length}}</td>
-          <td>{{ defect.repairPatterns|length }}</td>
-          <td>{% with defect.failingTests.0.error|split:"." as errors %}{{ errors|take_last }}{% endwith%}</td>
+        <td>
+          <a class="bug-name" href="{% url 'dissection:bug-detail' bug.name %}">{% replace bug.name "_" " " %}</a>
+        </td>
+        <td>{% get_object_by_id benchmarks bug.benchmarkId as benchmark%}{{ benchmark.name }}</td>
       </tr>
       {% endfor %}
-        
     </table>
   </div>
 </div>
