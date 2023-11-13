@@ -5,41 +5,25 @@ from django.urls import reverse
 from .utils import config, query
 
 
-class BugsList(View):
+class BugListView(View):
     template_name = "bug-list.html"
 
     def get(self, request, *args, **kwargs):    
-        with open(config.DATA_DIR + "bugs.json") as file:
-            bugs = json.load(file)
-        
-        with open(config.DATA_DIR + "benchmarks.json") as file:
-            benchmarks = json.load(file)
+        bugs = query.get_all("bugs.json")
+        benchmarks = query.get_all("benchmarks.json")
 
         return render(request, self.template_name, {"bugs": bugs, "benchmarks": benchmarks, "title": "List of Bugs"})
 
 
-class BugDetail(View):
+class BugDetailView(View):
     template_name = "bug-detail.html"
 
     def get(self, request, *args, **kwargs):    
-        with open(config.DATA_DIR + "bugs.json") as file:
-            bugs = json.load(file)
-
-        with open(config.DATA_DIR + "patches.json") as file:
-            patches = json.load(file)
-
-        with open(config.DATA_DIR + "tags.json") as file:
-            tags = json.load(file)
-
-        for bug in bugs:
-            if bug['name'] == kwargs['bug_name']:
-                break
-
-        selected_patches = []
-
-        for patch in patches:
-            if patch["bugId"] == bug["id"]:
-                selected_patches.append(patch)
+        bugs = query.get_all("bugs.json")
+        patches = query.get_all("patches.json")
+        tags = query.get_all("tags.json")
+        bug = query.get_objects_by_feature(bugs, "name", kwargs['bug_name'])[0]
+        selected_patches = query.get_objects_by_feature(patches, "bugId", bug["id"])
 
         return render(request, self.template_name, {
             "bug": bug, 
@@ -48,16 +32,9 @@ class BugDetail(View):
         })
     
     def post(self, request, *args, **kwargs):
-        with open(config.DATA_DIR + "bugs.json") as file:
-            bugs = json.load(file)
-
-        with open(config.DATA_DIR + "patches.json") as file:
-            patches = json.load(file)
-
-        for bug in bugs:
-            if bug["name"] == kwargs["bug_name"]:
-                break
-
+        bugs = query.get_all("bugs.json")
+        patches = query.get_all("patches.json")    
+        bug = query.get_objects_by_feature(bugs, "name", kwargs['bug_name'])[0]
         valid = True
         new_patch = True
 
@@ -83,51 +60,13 @@ class BugDetail(View):
                         }]
                     })
 
-        # patches = []
-
-        # with open('./dissection/data/static/original/apr-efficiency-pfl.json') as file:
-        #     dataset_dictionary = json.load(file)
-            
-        #     if defect['name'] in dataset_dictionary:
-        #         patches += dataset_dictionary[defect['name']]
-
-        # with open('./dissection/data/dynamic/defects4j-patches.json') as file:
-        #     dataset_dictionary = json.load(file)
-            
-        #     if defect['name'] in dataset_dictionary:
-        #         patches += dataset_dictionary[defect['name']]
-
-        # add_patch = True
-
-        # for patch in patches:
-        #     if 'tag-name-' + patch['id'] in request.POST.keys():
-        #         add_patch = False
-
-        #         break
-
-        # if add_patch:
-        # contributor_name = request.POST['contributor']
-        # patch_name = request.POST['name']
-        # correctness = request.POST['correctness']
-        # diff = request.FILES['diff'].read().decode("utf-8")
-
-        with open(config.DATA_DIR + "patches.json", "w") as file:
-            file.seek(0)
-            file.write(json.dumps(patches))
-
-        # else:
-        #     if not 'labels' in patch:
-        #         patch['labels'] = []
-
-        #     patch['labels'].append(request.POST['tag-name-' + patch['id']])
-
-
+        query.commit("patches.json", patches)
 
         return redirect(reverse('dissection:bug-detail', kwargs={
             'bug_name':bug['name'], 
         }))
 
-class PatchComparison(View):
+class PatchComparisonView(View):
     template_name = "patch-comparison.html"
 
     def get(self, request, *args, **kwargs):    
@@ -195,3 +134,21 @@ class PatchComparison(View):
             'bug_name': kwargs["bug_name"], 
             'selected_patches': kwargs["selected_patches"], 
         }))
+
+class TagListView(View):
+    template_name = "tag-list.html"
+
+    def get(self, request, *args, **kwargs):    
+        tags = query.get_all("tags.json")
+        classes = query.get_all("classes.json")
+
+        return render(request, self.template_name, {"tags": tags, "classes": classes})
+    
+class TagNewView(View):
+    template_name = "tag-new.html"
+
+    def get(self, request, *args, **kwargs):    
+        tags = query.get_all("tags.json")
+        classes = query.get_all("classes.json")
+
+        return render(request, self.template_name, {"tags": tags, "classes": classes})

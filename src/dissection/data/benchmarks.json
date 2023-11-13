@@ -3,8 +3,9 @@
     "id": 1,
     "name": "Defects4J",
     "description": "",
+    "languages": [1],
     "references": [
-      {
+    {
         "referenceId": 1,
         "fieldNames": []
       },

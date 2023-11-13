@@ -6,7 +6,10 @@ from . import views
 app_name = config.APP_NAME
 
 urlpatterns = [
-    path("", views.BugsList.as_view(), name="bug-list"),
-    path("<bug_name>/", views.BugDetail.as_view(), name="bug-detail"),
-    path("<bug_name>/<selected_patches>/", views.PatchComparison.as_view(), name="patch-comparison"),
+    path("bugs/", views.BugListView.as_view(), name="bug-list"),
+    path("bugs/<name>/", views.BugDetailView.as_view(), name="bug-detail"),
+    path("bugs/<name>/<patches>/", views.PatchComparisonView.as_view(), name="patch-comparison"),
+    path("tags/", views.TagListView.as_view(), name="tag-list"),
+    path("tags/new/", views.TagNewView.as_view(), name="tag-new"),
+
 ]
