@@ -170,7 +170,7 @@ class TagNewView(View):
         new_tag = {
             "id": len(tags) + 1,
             "name": request.POST["name"],
-            "classId": request.POST["classId"],
+            "classId": int(request.POST["classId"]),
             "value": value,
             "briefDescription": request.POST["briefDescription"],
             "description": request.POST["description"],
