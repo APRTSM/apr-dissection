@@ -152,3 +152,32 @@ class TagNewView(View):
         classes = query.get_all("classes.json")
 
         return render(request, self.template_name, {"tags": tags, "classes": classes})
+    
+    def post(self, request, *args, **kwargs):
+        tags = query.get_all("tags.json")
+        classes = query.get_all("classes.json")
+        value = request.POST["value"]
+        references = [
+            {
+                "referenceId": 1,
+                "fieldNames": [],
+            }
+        ]
+
+        if not value:
+            value = None
+
+        new_tag = {
+            "id": len(tags) + 1,
+            "name": request.POST["name"],
+            "classId": request.POST["classId"],
+            "value": value,
+            "briefDescription": request.POST["briefDescription"],
+            "description": request.POST["description"],
+            "references": references,
+
+        }
+
+        query.add_object("tags.json", new_tag)
+
+        return render(request, self.template_name, {"tags": tags, "classes": classes})

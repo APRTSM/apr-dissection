@@ -54,5 +54,127 @@ table tr th {
 }
 
 [data-href] {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+/*  */
+/*  */
+/*  */
+
+body {
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* font */
+
+.thin {
+  font-weight: 5;
+}
+
+.large {
+  font-size: 20px;
+}
+
+.huge {
+  font-size: 50px;
+}
+
+/* colors */
+
+.grey {
+  background-color: rgb(240, 245, 240);
+}
+
+.white {
+  background-color: rgb(250, 255, 250);
+}
+
+.black {
+  background-color: rgb(50, 100, 50);
+}
+
+/* text colors */
+
+.white-text {
+  color: rgb(250, 255, 250);
+}
+
+.grey-text {
+  color: rgb(145, 100, 145);
+}
+
+.black-text {
+  color: rgb(50, 100, 50);
+}
+
+.colorful-text {
+  color: rgb(100, 50, 100);
+}
+
+/* checkbox */
+
+label > input[type="checkbox"] {
+  display: none;
+}
+
+label > input[type="checkbox"] + *::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  margin-top: 3px;
+
+  border-radius: 10%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(100, 50, 100);
+  flex-shrink: 0;
+}
+
+label > input[type="checkbox"]:checked + * {
+  color: rgb(100, 50, 100);
+}
+
+label > input[type="checkbox"]:checked + *::before {
+  color: white;
+  text-align: center;
+  background: rgb(100, 50, 100);
+  border-color: rgb(100, 50, 100);
+}
+
+fieldset {
+  margin: 20px;
+  max-width: 400px;
+}
+
+label > input[type="checkbox"] + * {
+  display: inline-flex;
+  padding: 1px 23px;
+}
+
+label {
+  display: block;
+  padding-bottom: 0px;
+}
+
+/* table */
+
+table {
+  border-collapse: collapse;
+  border: 0px;
+  width: 100%;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+  padding-left: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(250, 255, 250);
 }

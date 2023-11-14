@@ -11,6 +11,12 @@ def commit(file_name, dataset):
         file.seek(0)
         file.write(json.dumps(dataset))
 
+def add_object(file_name, item):
+    items = get_all(file_name)
+    items.append(item)
+    
+    commit(file_name, items)
+
 def get_objects_by_feature(dataset, feature, value):
     items = []
 

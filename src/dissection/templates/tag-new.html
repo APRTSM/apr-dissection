@@ -1,4 +1,4 @@
-{% extends "list-generic.html" %} 
+{% extends "generic.html" %} 
 
 {% load static %} 
 {% load macros %}
@@ -21,35 +21,40 @@
       </div>
     </div>
     <div class="pt-3 px-4">
-        <form action="" class="w3-xlarge pt-5">
+        <form action="" method="post" enctype="multipart/form-data" class="w3-xlarge pt-5">
+            {% csrf_token %}
             <div class="row pt-5">
-                <label class="col-1 pe-3" for="name">Name</label>
-                <input class="col-4" id="name" type="text">
+                <label class="col-1" for="name">Name</label>
+                <input class="col-4" id="name" name="name" type="text">
             </div>
             <div class="row pt-5">
-                <label class="col-1 pe-3" for="class">Class</label>
-                <select class="col-4" id="class" name="class">
+                <label class="col-1" for="classId">Class</label>
+                <select class="col-4" id="classId" name="classId">
                     {% for class in classes %}
-                    <option value="class.id">{{ class.name }}</option>
+                    <option value="{{ class.id }}">{{ class.name }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="row pt-5">
-                <label class="col-1 pe-3" for="value">Value</label>
-                <input class="col-4" id="value" type="text">
+                <label class="col-1" for="value">Value</label>
+                <input class="col-4" id="value" name="value" type="text">
             </div>
             <div class="row pt-5">
-                <label class="col-2 pe-3" for="briefDescription">Brief Description</label>
-                <input class="col" id="briefDescription" type="text">
+                <label class="col-2" for="briefDescription">Brief Description</label>
+                <input class="col" id="briefDescription" name="briefDescription" type="text">
             </div>
             <div class="row pt-5">
-                <label class="col-2 pe-3" for="description">Description</label>
+                <label class="col-2" for="description">Description</label>
                 <textarea class="col" id="description" name="description" rows="4" cols="50"></textarea>
             </div>
             <div class="row pt-5">
-                <div class="col w3-xxlarge"></div>
-                <input class="col-2 align-self-center btn btn-success w3-large p-2" htype="submit" value="Add"></input>
+                <div id="preview" class="col p-3 border rounded bg-body">Markdown Preview for Description</div>
             </div>
+            <div class="row pt-5">
+                <div class="col w3-xxlarge"></div>
+                <input class="col-2 align-self-center btn btn-success w3-large p-2" type="submit" value="Add"></input>
+            </div>
+            <br class="m-5">
         </form>
     </div>
   </div>
