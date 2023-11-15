@@ -1,78 +1,43 @@
-<!-- @format -->
+
+
 {% load static %}
-{% load extras %} 
+{% load macros %}
+
 
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8" />
+<html lang="en">
+<head>
+    <title>Bug Comparison</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css"/>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css"/>
-
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'style/app.css' %}?version={% now 'U' %}"></link>
+    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
-
     <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
 
-    <script src="{% static 'js/bug-detail.js' %}?version={% now 'U' %}"></script>
-  </head>
+    <script src="{% static 'js/bootstrap-fixes.js' %}?version={% now 'U' %}"></script>
+    <script src="{% static 'js/utils.js' %}?version={% now 'U' %}"></script>
 
-  <script>
-    var diffsAndContributors = [
-      {% for patch in patches %}{% if patch.diff %}[`{{ patch.diff }}`, "{{ patch.id }}"],{% endif %}{% endfor %}
-    ];
-  </script>
+</head>
 
-  <body class="w3-content w3-container" style="max-width: 1500px; margin-top: 100px; margin-bottom: 100px">
-    <h2>{{ bug.name }}</h2>
-
-
-
-    <br />
-    <br />
-    <br />
-
-    {% for patch in patches %} {% if patch.diff %}
-    <div style="margin-bottom: 5px">
-      <span class="w3-xlarge">• {{ patch.tool }}</span>
-      <span class="w3-margin-left w3-margin-right">{{ patch.name }}</span>
-    </div>
-    <div id="{{ patch.id }}"></div>
-
-    {% for patch_tag in patch.tags %}
-      <span class="w3-margin-right w3-pale-yellow" style="padding: 5px">{% get_object_by_id tags patch_tag.tagId as tag %}{{ tag.name }}</span>
-    {% endfor %}
-
-    <br />
-    <br>
-    <br>
-    <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="w3-row">
-        <select class="w3-input" style="max-width: 300px;" id="tag-id" name="tag-id">
-          <option value="" selected disabled hidden>Choose a tag.</option>
-          {% for tag in tags %}
-          <option value="{{ tag.id }}">{{ tag.name }}</option>
-          {% endfor %}
-        </select>
-
+<body class="light">
+  <div class="row">
+      {% for patch in patches %}  
+      <div class="col-6">
+        <span class="lead">{{ patch.tool }} {{ patch.name }}</span>
+        <div class="diff">{{ patch.diff }}</div>
       </div>
-      <br />
-      <button class="w3-input" style="max-width: 300px;" type="submit" class="like" name="{{ patch.id }}" value="a">Add</button>
-      <br />
-    </form>
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-    {% endif %} {% endfor %}
-    <br />
-    <br />
-    <br />
-  </body>
+      {% endfor %}
+    </div>
+</body>
 </html>

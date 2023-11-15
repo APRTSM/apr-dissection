@@ -47,16 +47,6 @@ h1 {
 }
 
 /*  */
-
-table tr td,
-table tr th {
-  background-color: var(--transparent) !important;
-}
-
-[data-href] {
-  cursor: pointer;
-}
-
 /*  */
 /*  */
 /*  */
@@ -162,19 +152,6 @@ label {
 
 /* table */
 
-table {
-  border-collapse: collapse;
-  border: 0px;
-  width: 100%;
-}
-
-td,
-th {
-  text-align: left;
-  padding: 8px;
-  padding-left: 14px;
-}
-
-tr:nth-child(even) {
-  background-color: rgb(250, 255, 250);
+[data-href] {
+  cursor: pointer;
 }
