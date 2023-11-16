@@ -63,7 +63,7 @@ class BugDetailView(View):
         query.commit("patches.json", patches)
 
         return redirect(reverse('dissection:bug-detail', kwargs={
-            'bug_name':bug['name'], 
+            'name':bug['name'], 
         }))
 
 class PatchComparisonView(View):

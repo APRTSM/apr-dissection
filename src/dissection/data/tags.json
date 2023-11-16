@@ -76,5 +76,185 @@
         "fieldNames": ["id", "classId", "value", "references"]
       }
     ]
+  },
+  {
+    "id": 7,
+    "name": "R4",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "if statement instead of a ternary operator",
+    "description": "The APR patch is implemented by inserting new if statement but not a ternary operator to fix the bug.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "R5",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Unrolling a method",
+    "description": "All donor code of fixing a bug is rolled in a method, the patch unrolls the method but not invokes the method.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "R6",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Replacing a value without a side effect",
+    "description": "The buggy variable is not replaced, its value is replaced with the correct one without other side effect.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "R7",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Enumerating",
+    "description": "The patch enumerates and negates the condition that is positively considered in the buggy code.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "R8",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Unnecessary code uncleaned",
+    "description": "The unnecessary code is not removed in the patch, such code will not be executed at the end or impact the execution of patched program.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "R9",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Return earlier instead of a packaged return",
+    "description": "The patch checks the value of a boolean variable before other related boolean variables, and returns the related value if the condition is (not) satisfied. Developers however prefer to package the boolean variable with others and have a single return.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "R10",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "More null checks",
+    "description": "The APR-generated patch consists of more null checks than the corresponding developer's patch.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "R11",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Additional unneeded check",
+    "description": "The APR-generated patch considers unneeded check but such check is already considered in the context of non-buggy code.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "R12",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Partial code is not included",
+    "description": "The patch fixes a partial code but passing all tests, and the patch code is identical to the partial code of developer's patch.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "R13",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Less accurate comparison",
+    "description": "The patch code is not compared with the same accurate value as the code of developer's patch.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "R14",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "the field but not its getter",
+    "description": "The patch uses a field but not a getter method that returns the field.",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "R15",
+    "classId": 2,
+    "value": null,
+    "briefDescription": "Un-actionable code but not removing them",
+    "description": "The APR-generated patch does not remove the buggy code, but make it un-actionable (it will never be executed).",
+    "references": [
+      { "referenceId": 4, "fieldNames": [] },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "classId", "value", "references"]
+      }
+    ]
   }
 ]
