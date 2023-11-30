@@ -46,13 +46,13 @@ In Progress:
 ### Other Issues
 
 While fetching data from [4] I found that [3] does not include the following patches. 
-Lang_35 ACS,
-Math_35 ARJA,
-Closure_21 jGenProg,
-Closure_21 jKali,
-Closure_22 jKali,
-Lang_7 jKali,
-Math_72 SimFix,
-Lang_10 jKali,
-Math_50 jKali,
+- Lang_35 ACS,
+- Math_35 ARJA,
+- Closure_21 jGenProg,(But [3] has a GenProg-A patch for Closure_21)
+- Closure_21 jKali, (Same as Closure_21's case, it has a Kali-A patch)
+- Closure_22 jKali, (Same as Closure_21's case)
+- Lang_7 jKali, (Same as Closure_21's case)
+- Math_72 SimFix,
+- Lang_10 jKali,(Same as Closure_21's case)
+- Math_50 jKali,(Same as Closure_21's case)
 
