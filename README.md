@@ -3,7 +3,6 @@
 ## Shortcuts
 - [Data](https://github.com/APRTSM/apr-dissection/tree/main/src/dissection/data)
 - [Benchmarks' Status](https://github.com/APRTSM/apr-dissection/blob/main/benchmarks.md)
-- [References]()
 
 ## Run The Server
 - ## 1) Docker
