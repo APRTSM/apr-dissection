@@ -40,3 +40,19 @@ Currently Added Bug Benchmarks:
     
 In Progress:
   - Bears
+
+---
+
+### Other Issues
+
+While fetching data from [4] I found that [3] does not include the following patches. 
+Lang_35 ACS,
+Math_35 ARJA,
+Closure_21 jGenProg,
+Closure_21 jKali,
+Closure_22 jKali,
+Lang_7 jKali,
+Math_72 SimFix,
+Lang_10 jKali,
+Math_50 jKali,
+
