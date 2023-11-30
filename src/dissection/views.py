@@ -117,6 +117,13 @@ class PatchComparisonView(View):
             "patches": kwargs["patches"],
         }))
     
+class PatchExportView(View):
+    def post(self, request, *args, **kwargs):    
+        patches = query.get_all("patches.json")  
+        patch = query.get_object_by_id(patches, int(kwargs["patch_id"]))
+        kwargs["name"] + patch["tool"] + patch["id"]
+        
+
 
 class TagListView(View):
     template_name = "tag-list.html"
