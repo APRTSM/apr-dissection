@@ -1,7 +1,9 @@
 # APR-Dissection
 
 ## Shortcuts
-- [The Data Folder](https://github.com/APRTSM/apr-dissection/tree/main/src/dissection/data)
+- [Data](https://github.com/APRTSM/apr-dissection/tree/main/src/dissection/data)
+- [Benchmarks' Status]()
+- [References]()
 
 ## Run The Server
 - ## 1) Docker
