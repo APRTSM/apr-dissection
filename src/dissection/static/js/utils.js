@@ -12,6 +12,10 @@ $(document).ready(function () {
   if (document.getElementsByClassName("diff").length) {
     add_diff();
   }
+
+  if (document.getElementsByClassName("markdown").length) {
+    set_markdowns();
+  }
 });
 
 function truncate(str, n){
@@ -88,7 +92,15 @@ function add_diff() {
     });
   });
   $(".d2h-file-name").each(function () {
-    this.innerHTML = truncate(this.innerHTML, 70);
+    this.innerHTML = truncate(this.innerHTML, 50);
   });
 }
 
+function set_markdowns() {
+  $(".markdown").each(function () {
+    var converter = new showdown.Converter();
+    var text = $(this).text();
+    var html = converter.makeHtml(text);
+    $(this).html(html);
+  });
+}

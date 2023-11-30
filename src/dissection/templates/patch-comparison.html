@@ -1,13 +1,12 @@
-
-
 {% load static %}
 {% load macros %}
+{% load extras %} 
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bug Comparison</title>
+    <title>{{ bug.name }}</title>
 
     <meta charset="UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1" ></meta>
@@ -30,14 +29,86 @@
 
 </head>
 
-<body class="light">
+<body class="">
+
+  <!-- Infos -->
+  <table class="table table-hover table-striped transparent border">
+    <thead>
+      <th>Tool</th>
+      <th>Name</th>
+      <th>Labels</th>
+      <th># Comments</th>
+    </thead>
+    {% for patch in patches %}  
+    <tr>
+      <td class="col-2">
+        {{ patch.tool }} 
+      </td>
+      <td class="col-2">
+        {{ patch.name }}
+      </td>
+      <td class="col-7">
+        Labels
+      </td>  
+      <td class="col-1">
+        {{ patch_comment_pairs|get_value_by_key:patch.id|length }}
+      </td>    
+      <td class="col">
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-{{ patch.id }}">Comments</button>
+      </td>      
+    </tr>
+    {% endfor %}
+  </table>
+  
+  <br>
+  
+  <!-- Diffs -->
   <div class="row">
-      {% for patch in patches %}  
-      <div class="col-6">
-        <span class="lead">{{ patch.tool }} {{ patch.name }}</span>
-        <div class="diff">{{ patch.diff }}</div>
-      </div>
-      {% endfor %}
+    {% for patch in patches %}  
+    <div class="col-6">
+      <span class="row">
+        <div class="col ms-4 text-danger">
+          {{ patch.tool }} {{ patch.name }}
+        </div>
+      </span>
+      <div class="diff">{{ patch.diff }}</div>
     </div>
+    {% endfor %}
+  </div>
+
+  <!-- Modals -->
+  {% for patch in patches %}  
+  <div class="modal" id="modal-{{ patch.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-danger" id="exampleModalLabel">{{ patch.tool }} {{ patch.name }}</h5>
+        </div>
+        <div class="modal-body">
+          {% for comment in patch_comment_pairs|get_value_by_key:patch.id %}  
+          {% get_object_by_id references comment.referenceId as reference %}
+          <div class="text-primary">
+            {{ reference.name }}
+          </div>
+          <div>
+            {{ comment.content }}
+          </div>
+          <br>
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              <textarea class="form-control" id="comment-content" name="comment-content" rows="3" cols="100" placeholder="New Comment"></textarea>
+              <div class="col mt-2 position-relative">
+                <div class="btn invisible">Invisible</div>
+                <button class="btn btn-success position-absolute end-0" type="submit" name="{{ patch.id }}-add-comment">Submit</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}  
 </body>
 </html>

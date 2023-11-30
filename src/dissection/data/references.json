@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Sahand",
+    "description": ""
+  },
+  {
+    "id": 2,
+    "name": "Defects4J Dissection",
+    "description": "https://github.com/program-repair/defects4j-dissection"
+  },
+  {
+    "id": 3,
+    "name": "DL4PatchCorrectness",
+    "description": "https://github.com/TruX-DTF/DL4PatchCorrectness"
+  },
+  {
+    "id": 4,
+    "name": "APR-Efficiency",
+    "description": "https://github.com/TruX-DTF/APR-Efficiency"
+  },
+  {
+    "id": 5,
+    "name": "bugs-dot-jar-dissection",
+    "description": "https://github.com/tdurieux/bugs-dot-jar-dissection/tree/master"
+  }
+]

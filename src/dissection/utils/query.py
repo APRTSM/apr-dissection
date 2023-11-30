@@ -26,9 +26,25 @@ def get_objects_by_feature(dataset, feature, value):
 
     return items
 
+def get_object_by_unique_feature(dataset, feature, value):
+    for item in dataset:
+        if item[feature] == value:
+            return item
+
 def get_object_by_id(dataset, id):
     for item in dataset:
         if item["id"] == id:
-            break
+            return item
 
-    return item
+def get_foreign_key_pairs(dataset, foreign_key_field_name):
+    pairs = {}
+
+    for item in dataset:
+        try:
+            pairs[item[foreign_key_field_name]].append(item)
+
+        except:
+            pairs[item[foreign_key_field_name]] = [item]
+
+    return pairs
+    

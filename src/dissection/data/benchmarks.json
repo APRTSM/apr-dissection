@@ -11,7 +11,23 @@
       },
       {
         "referenceId": 1,
-        "fieldNames": ["description", "references"]
+        "fieldNames": ["id", "description", "references"]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bugs.jar",
+    "description": "",
+    "languages": [1],
+    "references": [
+      {
+        "referenceId": 5,
+        "fieldNames": []
+      },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "description", "references"]
       }
     ]
   }

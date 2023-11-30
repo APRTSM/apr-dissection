@@ -12420,11 +12420,6 @@
           { "referenceId": 1, "fieldNames": [] },
           { "referenceId": 3, "fieldNames": ["tagId"] }
         ]
-      },
-      {
-        "tagId": 3,
-        "description": "",
-        "references": [{ "referenceId": 0, "fieldNames": [] }]
       }
     ],
     "references": [

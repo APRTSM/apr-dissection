@@ -70,57 +70,53 @@ class PatchComparisonView(View):
     template_name = "patch-comparison.html"
 
     def get(self, request, *args, **kwargs):    
+        references = query.get_all("references.json")
         bugs = query.get_all("bugs.json")
         patches = query.get_all("patches.json")  
         tags = query.get_all("tags.json")
-        bug = query.get_objects_by_feature(bugs, "name", kwargs["name"])
+        comments = query.get_all("comments.json")
+
+        patch_comment_pairs = query.get_foreign_key_pairs(comments, "patchId")
+
+        bug = query.get_object_by_unique_feature(bugs, "name", kwargs["name"])
         selected_patches = [query.get_object_by_id(patches, int(patch_id)) for patch_id in kwargs["patches"].split(",")]
 
         return render(request, self.template_name, {
+            "references": references,
             "bug": bug, 
             "patches": selected_patches,
             "tags": tags,
+            "comments": comments,
+            "patch_comment_pairs": patch_comment_pairs,
         })
     
-        with open(config.DATA_DIR + "bugs.json") as file:
-            bugs = json.load(file)
-
-        with open(config.DATA_DIR + "patches.json") as file:
-            patches = json.load(file)
-
-        for bug in bugs:
-            if bug["name"] == kwargs["name"]:
-                break
-
-        valid = True
+    def post(self, request, *args, **kwargs):
+        bugs = query.get_all("bugs.json")
+        patches = query.get_all("patches.json")    
+        comments = query.get_all("comments.json")    
+        bug = query.get_objects_by_feature(bugs, "name", kwargs['name'])[0]
 
         for patch in patches:
-            if str(patch["id"]) in request.POST.keys():
+            if str(patch["id"]) + "-add-comment" in request.POST.keys():
                 break
 
-        if request.POST[str(patch["id"])] == "a":
-            for patch_tag in patch["tags"]:
-                if patch_tag["tagId"] == int(request.POST["tag-id"]):
-                    valid = False
+        new_comment = {
+            "id": len(comments) + 1,
+            "patchId": patch["id"],
+            "content": request.POST["comment-content"],
+            "followingCommentId": 0,
+            "referenceId": 1,
+        }
 
-            if valid:
-                patch["tags"].append({
-                    "tagId": int(request.POST["tag-id"]),
-                    "description": "",
-                    "references": [{
-                        "referenceId": 0,
-                        "fieldNames": []
-                    }]
-                })
+        comments.append(new_comment)
 
-        with open(config.DATA_DIR + "patches.json", "w") as file:
-            file.seek(0)
-            file.write(json.dumps(patches))
+        query.commit("comments.json", comments)
 
-        return redirect(reverse('dissection:patch-comparison', kwargs={
-            'bug_name': kwargs["name"], 
-            'selected_patches': kwargs["selected_patches"], 
+        return redirect(reverse("dissection:patch-comparison", kwargs={
+            "name":kwargs["name"], 
+            "patches": kwargs["patches"],
         }))
+    
 
 class TagListView(View):
     template_name = "tag-list.html"
