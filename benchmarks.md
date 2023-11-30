@@ -45,7 +45,7 @@ In Progress:
 
 ### Other Issues
 
-While fetching data from [4] I found that [3] does not include the following patches. 
+While fetching data from [4] I found that [3] does not include the following patches:
 - Lang_35 ACS,
 - Math_35 ARJA,
 - Closure_21 jGenProg,(But [3] has a GenProg-A patch for Closure_21)
