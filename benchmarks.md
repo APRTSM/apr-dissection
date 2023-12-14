@@ -9,8 +9,9 @@
 
 ---
 
-### Tools
+### Tools' Progress
 
+Currently on website:
 | Name | Bug Benchmark | Correct/Plausible/Unknown Patches |
 | - | - | - |
 | ACS | D4J | 16/5/0 | 
@@ -30,9 +31,28 @@
 | Nopol | D4J | 2/7/0 |
 | DynaMoth | D4J | 3/10/0 |
 
+In progress:
+- CapGen
+- SharpFix
+
+Excluded:
+| Name | Bug Benchmark | Reason |
+| - | - | - |
+| VarFix | IntroClassJava, D4J | Source code was not available, Patches were not available | 
+
 ---
 
-### Bug Branches' Progress
+### Bug tools' Progress
+
+Currently Added Bug Benchmarks:
+  - D4J
+  - Bug.jar
+    
+In Progress:
+  - Bears
+
+
+### Bug Benchmarks' Progress
 
 Currently Added Bug Benchmarks:
   - D4J
