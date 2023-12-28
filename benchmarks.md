@@ -42,16 +42,6 @@ Excluded:
 
 ---
 
-### Bug tools' Progress
-
-Currently Added Bug Benchmarks:
-  - D4J
-  - Bug.jar
-    
-In Progress:
-  - Bears
-
-
 ### Bug Benchmarks' Progress
 
 Currently Added Bug Benchmarks:
