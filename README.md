@@ -3,7 +3,7 @@
 ## Shortcuts
 - [Data](https://github.com/APRTSM/apr-dissection/tree/main/src/dissection/data)
 - [Reports](https://github.com/APRTSM/apr-dissection/blob/main/reports.md)
-- [Reports](https://github.com/APRTSM/apr-dissection/blob/main/reading-list.md)
+- [Reading List](https://github.com/APRTSM/apr-dissection/blob/main/reading-list.md)
 
 ## Run The Server
 - ## 1) Docker
