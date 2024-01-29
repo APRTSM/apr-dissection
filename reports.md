@@ -56,7 +56,7 @@ Currently on website:
 | Nopol | D4J, BJ, B, QB, ICJ | 0/0/107, 0/0/72, 0/0/1, 0/0/1, 0/0/32 | 9 |
 | NPEFix | D4J, BJ, B, QB, ICJ | 0/0/9, 0/0/3, 0/0/1, 0/0/2, 0/0/0 | 9 |
 
-In progress:
+In progress:4
 - CapGen
 - SharpFix
 
@@ -93,5 +93,5 @@ While fetching data from [4] I found that [3] does not include the following pat
 
 In [ODS](https://arxiv.org/pdf/1910.12057.pdf) diff line ranges are different for various patches. Isn't it an issue?
 
-In ReapairThemAll [9]. They include only part of patches 1092/60,000.
+In ReapairThemAll [9]. They include only part of patches 1092/60,000. Besides they have 1098 patches but 6 of them do not have diffs.
 
