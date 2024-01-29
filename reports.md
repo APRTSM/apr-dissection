@@ -16,24 +16,24 @@
 ### Tools' Progress
 
 Currently on website:
-| Name | Bug Benchmark | Correct/Plausible/Unknown Patches |
-| - | - | - |
-| ACS | D4J | 16/5/0 | 
-| Cardumem | D4J | 14/2/0 |
-| SimFix | D4J | 28/22/0 |
-| ARJA | D4J | 12/24/0 |
-| AVATAR | D4J | 32/25/0 |
-| TBar | D4J | 57/37/0 |
-| FixMiner | D4J | 38/33/0 |
-| kPAR | D4J | 34/37/0 |
-| jMutRepair | D4J | 5/6/0 |
-| GenProg-A | D4J | 7/22/0 |
-| jGenProg | D4J | 6/10/0 |
-| Kali-A | D4J | 6/36/0 |
-| jKali | D4J | 2/6/0 |
-| RSRepair-A | D4J | 10/24/0 |
-| Nopol | D4J | 2/7/0 |
-| DynaMoth | D4J | 3/10/0 |
+| Name | Bug Benchmark | Correct/Plausible/Unknown Patches | Reference |
+| - | - | - | - |
+| ACS | D4J | 16/5/0 | 3 |
+| Cardumem | D4J | 14/2/0 | 3 |
+| SimFix | D4J | 28/22/0 | 3 |
+| ARJA | D4J | 12/24/0 | 3 |
+| AVATAR | D4J | 32/25/0 | 3 |
+| TBar | D4J | 57/37/0 | 3 |
+| FixMiner | D4J | 38/33/0 | 3 |
+| kPAR | D4J | 34/37/0 | 3 |
+| jMutRepair | D4J | 5/6/0 | 3 |
+| GenProg-A | D4J | 7/22/0 | 3 |
+| jGenProg | D4J | 6/10/0 | 3 |
+| Kali-A | D4J | 6/36/0 | 3 |
+| jKali | D4J | 2/6/0 | 3 |
+| RSRepair-A | D4J | 10/24/0 | 3 |
+| Nopol | D4J | 2/7/0 | 3 |
+| DynaMoth | D4J | 3/10/0 | 3 |
 
 In progress:
 - CapGen
