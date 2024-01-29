@@ -43,7 +43,6 @@ Currently on website:
 | RSRepair-A | D4J | 10/24/0 | 3 |
 | Nopol | D4J | 2/7/0 | 3 |
 | DynaMoth | D4J | 3/10/0 | 3 |
-
 | ARJA | D4J, BJ, B, QB, ICJ | 0/0/86, 0/0/21, 0/0/12, 0/0/4, 0/0/23 | 9 |
 | Cardumen | D4J, BJ, B, QB, ICJ | 0/0/17, 0/0/11, 0/0/13, 0/0/4, 0/0/0 | 9 |
 | DynaMoth | D4J, BJ, B, QB, ICJ | 0/0/74, 0/0/124, 0/0/0, 0/0/2, 0/0/6 | 9 |
