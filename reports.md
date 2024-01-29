@@ -1,4 +1,4 @@
-### General
+### Refrences
 
 | Name | Status | Content | ID |
 | - | - | - | - |
@@ -10,6 +10,15 @@
 | [QuixBugs](https://github.com/jkoppel/QuixBugs) | Done | 80 quixbugs BUGS, human PATCHES | 7 |
 | [IntroClassJava](https://github.com/Spirals-Team/IntroClassJava) | Done | 297 IntroClassJava BUGS, NO HUMAN PATCHES | 8 |
 | [RepairThemAll](https://github.com/program-repair/RepairThemAll_experiment) | Done | 1092 available TOOL-GENERATED PATCHES (not labeled) | 9 |
+
+---
+
+### Benchmarks
+- Defects4J (D4J)
+- Bugs.Jar (BJ)
+- Bears (B)
+- QuixBugs (QB)
+- IntroClassJava (ICJ)
 
 ---
 
@@ -34,6 +43,18 @@ Currently on website:
 | RSRepair-A | D4J | 10/24/0 | 3 |
 | Nopol | D4J | 2/7/0 | 3 |
 | DynaMoth | D4J | 3/10/0 | 3 |
+
+| ARJA | D4J, BJ, B, QB, ICJ | 0/0/86, 0/0/21, 0/0/12, 0/0/4, 0/0/23 | 9 |
+| Cardumen | D4J, BJ, B, QB, ICJ | 0/0/17, 0/0/11, 0/0/13, 0/0/4, 0/0/0 | 9 |
+| DynaMoth | D4J, BJ, B, QB, ICJ | 0/0/74, 0/0/124, 0/0/0, 0/0/2, 0/0/6 | 9 |
+| GenProg-A | D4J, BJ, B, QB, ICJ | 0/0/45, 0/0/9, 0/0/1, 0/0/4, 0/0/18 | 9 |
+| jGenProg | D4J, BJ, B, QB, ICJ | 0/0/31, 0/0/14, 0/0/13, 0/0/3, 0/0/4 | 9 |
+| jKali | D4J, BJ, B, QB, ICJ | 0/0/27, 0/0/8, 0/0/10, 0/0/2, 0/0/5 | 9 |
+| jMutRepair | D4J, BJ, B, QB, ICJ | 0/0/20, 0/0/11, 0/0/7, 0/0/3, 0/0/24 | 9 |
+| Kali-A | D4J, BJ, B, QB, ICJ | 0/0/69, 0/0/24, 0/0/15, 0/0/2, 0/0/3 | 9 |
+| RSRepair-A | D4J, BJ, B, QB, ICJ | 0/0/62, 0/0/6, 0/0/1, 0/0/4, 0/0/22 | 9 |
+| Nopol | D4J, BJ, B, QB, ICJ | 0/0/107, 0/0/72, 0/0/1, 0/0/1, 0/0/32 | 9 |
+| NPEFix | D4J, BJ, B, QB, ICJ | 0/0/9, 0/0/3, 0/0/1, 0/0/2, 0/0/0 | 9 |
 
 In progress:
 - CapGen
