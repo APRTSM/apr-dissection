@@ -7,9 +7,9 @@
 | [APR-Efficiency](https://github.com/TruX-DTF/APR-Efficiency) | Done | 16 evaluation RULES, a list of correct patches of D4J LABELED by those rules | 4 |
 | [bugs-dot-jar-dissection](https://github.com/tdurieux/bugs-dot-jar-dissection/tree/master) | Done | 1158 bugs.jar BUGS, human PATCHES | 5 |
 | [Bears](https://github.com/bears-bugs/bears-benchmark) | Done | 251 bears BUGS, human PATCHES | 6 |
-| [QuixBugs](https://github.com/jkoppel/QuixBugs) | Done | 80 quixbufs BUGS, human PATCHES | 7 |
-| [IntroClassJava](https://github.com/Spirals-Team/IntroClassJava) | Done | 297 quixbufs BUGS, NO HUMAN PATCHES | 8 |
-| [RepairThemAll](https://github.com/program-repair/RepairThemAll_experiment) | Done | 459 TOOL-GENERATED PATCHES (not labeled) | 9 |
+| [QuixBugs](https://github.com/jkoppel/QuixBugs) | Done | 80 quixbugs BUGS, human PATCHES | 7 |
+| [IntroClassJava](https://github.com/Spirals-Team/IntroClassJava) | Done | 297 IntroClassJava BUGS, NO HUMAN PATCHES | 8 |
+| [RepairThemAll](https://github.com/program-repair/RepairThemAll_experiment) | Done | 1092 available TOOL-GENERATED PATCHES (not labeled) | 9 |
 
 ---
 
