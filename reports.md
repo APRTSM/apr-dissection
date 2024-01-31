@@ -27,22 +27,22 @@
 Currently on website:
 | Name | Bug Benchmark | Correct/Plausible/Unknown Patches | Reference |
 | - | - | - | - |
-| ACS | D4J | 16/5/0 | 3 |
-| Cardumem | D4J | 14/2/0 | 3 |
-| SimFix | D4J | 28/22/0 | 3 |
-| ARJA | D4J | 12/24/0 | 3 |
-| AVATAR | D4J | 32/25/0 | 3 |
-| TBar | D4J | 57/37/0 | 3 |
-| FixMiner | D4J | 38/33/0 | 3 |
-| kPAR | D4J | 34/37/0 | 3 |
-| jMutRepair | D4J | 5/6/0 | 3 |
-| GenProg-A | D4J | 7/22/0 | 3 |
-| jGenProg | D4J | 6/10/0 | 3 |
-| Kali-A | D4J | 6/36/0 | 3 |
-| jKali | D4J | 2/6/0 | 3 |
-| RSRepair-A | D4J | 10/24/0 | 3 |
-| Nopol | D4J | 2/7/0 | 3 |
-| DynaMoth | D4J | 3/10/0 | 3 |
+| ACS | D4J | 16/5/0 | 4 |
+| Cardumem | D4J | 14/2/0 | 4 |
+| SimFix | D4J | 28/22/0 | 4 |
+| ARJA | D4J | 12/24/0 | 4 |
+| AVATAR | D4J | 32/25/0 | 4 |
+| TBar | D4J | 57/37/0 | 4 |
+| FixMiner | D4J | 38/33/0 | 4 |
+| kPAR | D4J | 34/37/0 | 4 |
+| jMutRepair | D4J | 5/6/0 | 4 |
+| GenProg-A | D4J | 7/22/0 | 4 |
+| jGenProg | D4J | 6/10/0 | 4 |
+| Kali-A | D4J | 6/36/0 | 4 |
+| jKali | D4J | 2/6/0 | 4 |
+| RSRepair-A | D4J | 10/24/0 | 4 |
+| Nopol | D4J | 2/7/0 | 4 |
+| DynaMoth | D4J | 3/10/0 | 4 |
 | ARJA | D4J, BJ, B, QB, ICJ | 0/0/86, 0/0/21, 0/0/12, 0/0/4, 0/0/23 | 9 |
 | Cardumen | D4J, BJ, B, QB, ICJ | 0/0/17, 0/0/11, 0/0/13, 0/0/4, 0/0/0 | 9 |
 | DynaMoth | D4J, BJ, B, QB, ICJ | 0/0/74, 0/0/124, 0/0/0, 0/0/2, 0/0/6 | 9 |
@@ -79,7 +79,7 @@ In Progress:
 
 ### Other Issues
 
-While fetching data from [4] I found that [3] does not include the following patches:
+While fetching data from [4] I found that [3] does not include the following patches: Why is that?
 - Lang_35 ACS,
 - Math_35 ARJA,
 - Closure_21 jGenProg,(But [3] has a GenProg-A patch for Closure_21)
