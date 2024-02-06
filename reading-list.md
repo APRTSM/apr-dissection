@@ -5,6 +5,12 @@
   - Classify overfitting patches by extracting 202 code features.
   - They used sanity check and Evosuits to obtain a labeled dataset.
  
+- [GumTree](https://hal.science/hal-01054552/document) 2014
+  - introduces new gumtree algorithm to map nodes of two ASTs and then the mapping is used to generate an edit script
+ 
+- [BFS small medium](https://dl.acm.org/doi/pdf/10.1145/3340544) 2019
+  - mines open source repos and maps methods. considers each changed method as a bug. generates abstractions and edit script for bug-fix pairs.
+ 
 - [Automatic Software Repair: A Bibliography](https://dl.acm.org/doi/pdf/10.1145/3105906) 2017
  
 - [Practical Program Repair via Bytecode Mutation](https://lingming.cs.illinois.edu/publications/issta2019a.pdf) 2019
