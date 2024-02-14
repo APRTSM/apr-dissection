@@ -10,7 +10,12 @@
 - - Uses 3 patch datasets (Xiong's and APR-Efficiency - labeled) and (repairthemall - not-labeled)
  
 - [GumTree](https://hal.science/hal-01054552/document) 2014 READ-ALGORITHM
-  - introduces new gumtree algorithm to map nodes of two ASTs and then the mapping is used to generate an edit script. 
+  - introduces new gumtree algorithm to map nodes of two ASTs and then the mapping is used to generate an edit script.
+ 
+- [Coming](https://github.com/SpoonLabs/coming)  2018
+  - A tool to mine patterns from github
+  - Also can be run for two files (Other options exist)
+  - Also can generate ODS's features (ODS uses Coming to get the features)
  
 - [BFS small medium](https://dl.acm.org/doi/pdf/10.1145/3340544) 2019 READ-BENCHMARK
   - mines open source repos and maps methods. considers each changed method as a bug. generates abstractions and edit script for bug-fix pairs. 
