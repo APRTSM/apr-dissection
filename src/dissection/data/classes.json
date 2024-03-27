@@ -31,5 +31,16 @@
         "fieldNames": []
       }
     ]
+  },
+  {
+    "id": 4,
+    "name": "Tool Labels",
+    "description": "",
+    "references": [
+      {
+        "referenceId": 1,
+        "fieldNames": []
+      }
+    ]
   }
 ]

@@ -6,7 +6,7 @@
   },
   {
     "id": 2,
-    "name": "Defects4J Dissection",
+    "name": "defects4j-dissection",
     "description": "https://github.com/program-repair/defects4j-dissection"
   },
   {
@@ -22,6 +22,26 @@
   {
     "id": 5,
     "name": "bugs-dot-jar-dissection",
-    "description": "https://github.com/tdurieux/bugs-dot-jar-dissection/tree/master"
+    "description": "https://github.com/tdurieux/bugs-dot-jar-dissection"
+  },
+  {
+    "id": 6,
+    "name": "bears-benchmark",
+    "description": "https://github.com/bears-bugs/bears-benchmark"
+  },
+  {
+    "id": 7,
+    "name": "QuixBugs",
+    "description": "https://github.com/jkoppel/QuixBugs"
+  },
+  {
+    "id": 8,
+    "name": "IntroClassJava",
+    "description": "https://github.com/Spirals-Team/IntroClassJava"
+  },
+  {
+    "id": 9,
+    "name": " RepairThemAll-experiment",
+    "description": "https://github.com/program-repair/RepairThemAll_experiment"
   }
 ]

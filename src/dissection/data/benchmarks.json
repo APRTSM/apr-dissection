@@ -30,5 +30,53 @@
         "fieldNames": ["id", "description", "references"]
       }
     ]
+  },
+  {
+    "id": 3,
+    "name": "Bears",
+    "description": "",
+    "languages": [1],
+    "references": [
+      {
+        "referenceId": 6,
+        "fieldNames": []
+      },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "description", "references"]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "QuixBugs",
+    "description": "",
+    "languages": [1, 2],
+    "references": [
+      {
+        "referenceId": 7,
+        "fieldNames": []
+      },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "description", "references"]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "IntroClassJava",
+    "description": "",
+    "languages": [1],
+    "references": [
+      {
+        "referenceId": 8,
+        "fieldNames": []
+      },
+      {
+        "referenceId": 1,
+        "fieldNames": ["id", "description", "references"]
+      }
+    ]
   }
 ]

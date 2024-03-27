@@ -48,7 +48,9 @@
         {{ patch.name }}
       </td>
       <td class="col-7">
-        Labels
+        {% for patch_tag in patch.tags %}
+          <span class="w3-margin-right w3-pale-yellow" style="padding: 5px">{% get_object_by_id tags patch_tag.tagId as tag %}{{ tag.name }}{% get_object_by_id references patch_tag.references.1.referenceId as reference %} - {{ reference.name }}</span>
+        {% endfor %}
       </td>  
       <td class="col-1">
         {{ patch_comment_pairs|get_value_by_key:patch.id|length }}
@@ -75,6 +77,8 @@
     </div>
     {% endfor %}
   </div>
+
+  
 
   <!-- Modals -->
   {% for patch in patches %}  

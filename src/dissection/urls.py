@@ -6,6 +6,7 @@ from . import views
 app_name = config.APP_NAME
 
 urlpatterns = [
+    path("", views.IndexView.as_view(), name="index"),
     path("bugs/", views.BugListView.as_view(), name="bug-list"),
     path("bugs/<name>/", views.BugDetailView.as_view(), name="bug-detail"),
     path("bugs/<name>/<patches>/", views.PatchComparisonView.as_view(), name="patch-comparison"),

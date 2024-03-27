@@ -25,8 +25,9 @@
   <div id="bug-list">
     <table class="grey-text thin">
       <tr class="black-text">
-        <th class="">Name</th>
-        <th class="">Benchmark</th>
+        <th class="" style="width: 200px;">Name</th>
+        <th class="" style="width: 200px;">Benchmark</th>
+        <th class="" style="width: 200px;"># Patches</th>
       </tr>
 
       {% for bug in bugs %}
@@ -35,6 +36,7 @@
           <a class="bug-name" href="{% url 'dissection:bug-detail' bug.name %}">{% replace bug.name "_" " " %}</a>
         </td>
         <td>{% get_object_by_id benchmarks bug.benchmarkId as benchmark%}{{ benchmark.name }}</td>
+        <td>{% get_objects_by_feature patches "bugId" bug.id as selected_patches%}{{ selected_patches|length }}</td>
       </tr>
       {% endfor %}
     </table>

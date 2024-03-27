@@ -63,9 +63,7 @@ function desctiption_changed() {
 
 function add_diff() {
   $(".diff").each(function () {
-    var diffFile = this.innerHTML;
-
-    var diffString = diffFile;
+    var diffString = $(this).html(this.innerHTML).text();
     var targetElement = this;
     
     var configuration = {

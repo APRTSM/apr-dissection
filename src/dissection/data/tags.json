@@ -256,5 +256,16 @@
         "fieldNames": ["id", "classId", "value", "references"]
       }
     ]
+  },
+  {
+    "id": 19,
+    "name": "SourcererCC",
+    "classId": 4,
+    "value": null,
+    "briefDescription": "Labeled as a clone by SourcererCC",
+    "description": "https://github.com/Mondego/SourcererCC/tree/master",
+    "references": [
+      { "referenceId": 1, "fieldNames": [] }
+    ]
   }
 ]
