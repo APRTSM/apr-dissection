@@ -14,7 +14,7 @@
   - Go to `apr-dissection/`
   - Run `docker-compose up -d --build`
     - If the error `docker-compose not found` occurred, install docker-compose.
-  - If the container runs successfully, you may visit [the page](http://0.0.0.0:8000/dissection/).
+  - If the container runs successfully, you may visit [the page](http://0.0.0.0:8000/).
  
 - ## 2) Not Using Docker
   - Requirements:
@@ -22,4 +22,4 @@
   - Go to `apr-dissection/src/`
   - Run `source init.sh`
     - You may need to change the content of `apr-dissection/src/init.sh` file (e.g. using `python` instead of `python3`).
-  - If the server runs successfully, you may visit [the page](http://127.0.0.1:8000/dissection/).
+  - If the server runs successfully, you may visit [the page](http://127.0.0.1:8000/).
