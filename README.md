@@ -8,11 +8,12 @@
 ## Run The Server
 - ## 1) Docker
   - Requirements:
-    - Docker
+    - `docker` (Latest version should work.)
+    - `docker-compose` (Latest version should work.)
   - Clone the Repository.
   - Go to `apr-dissection/`
   - Run `docker-compose up -d --build`
-    - If the error `docker-compose not found` accured, install docker-compose.
+    - If the error `docker-compose not found` occurred, install docker-compose.
   - If the container runs successfully, you may visit [the page](http://0.0.0.0:8000/dissection/).
  
 - ## 2) Not Using Docker
