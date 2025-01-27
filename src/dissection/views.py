@@ -4,11 +4,68 @@ from django.views import View
 from django.views.generic import TemplateView
 from django.urls import reverse
 from .utils import config, query
+from django.http import HttpResponseRedirect
 
 
 class IndexView(TemplateView):
     template_name = "index.html"
     
+
+class HomeView(TemplateView):
+    template_name = "home.html"
+
+    def post(self, request, *args, **kwargs):
+        input_id = request.POST.get("id")
+
+        if input_id:
+            request.session["user_id"] = input_id
+
+            return redirect(reverse("dissection:comparison", kwargs={"tool_patch_index": "0"}))
+
+        return HttpResponseRedirect(request.path)
+
+
+class ComparisonView(View):
+    template_name = "comparison.html"
+
+    def get(self, request, *args, **kwargs):
+        tool_patch_index = kwargs.get("tool_patch_index")
+
+        all_developer_patches = query.get_all("cleaned-developer-patches.pkl")
+        all_tool_patches = query.get_all("cleaned-tool-patches.pkl")
+
+        all_correct_tool_patches = all_tool_patches[all_tool_patches["correctness"] == "Correct"]
+
+        tool_patch = all_correct_tool_patches.iloc[int(tool_patch_index)]
+        developer_patch = all_developer_patches[all_developer_patches["bug_uid"] == tool_patch["bug_uid"]].iloc[0]
+
+        developer_diff = query.read_file(f"{developer_patch.name}.patch")
+        tool_patch_diff = query.read_file(f"{tool_patch.name}.patch")
+
+        return render(request, self.template_name, {
+            "bug_uid": tool_patch["bug_uid"],
+            "tool_patch_index": tool_patch_index,
+            "developer_patch_name": developer_patch.name, 
+            "tool_patch_name": tool_patch.name, 
+            "developer_diff": developer_diff, 
+            "tool_patch_diff": tool_patch_diff,
+            "tool_patch_expert_label": tool_patch["expert_label"],
+        })
+
+    def post(self, request, *args, **kwargs):
+        tool_patch_index = int(kwargs.get("tool_patch_index"))
+        expert_label = request.POST.get("type")
+
+        all_tool_patches = query.get_all("cleaned-tool-patches.pkl")
+        all_correct_tool_patches = all_tool_patches[all_tool_patches["correctness"] == "Correct"]
+
+        all_correct_tool_patches.at[tool_patch_index, "expert_label"] = expert_label
+        query.save("cleaned-tool-patches.pkl", all_tool_patches)
+
+        next_tool_patch_index = tool_patch_index + 1
+
+        return redirect(reverse("dissection:comparison", kwargs={"tool_patch_index": next_tool_patch_index}))
+
 
 class BugListView(View):
     template_name = "bug-list.html"

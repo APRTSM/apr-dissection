@@ -1,10 +1,38 @@
 from . import config
 import json
+import pickle
 
 
 def get_all(file_name):
-    with open(config.DATA_DIR + file_name) as file:
-        return json.load(file)
+    if file_name.endswith(".json"):
+        with open(config.DATA_DIR + file_name) as file:
+            return json.load(file)
+
+    elif file_name.endswith(".pkl"):
+        with open(config.DATA_DIR + file_name, "rb") as file:
+            return pickle.load(file)
+        
+    else:
+        raise ValueError("Invalid file format")
+    
+def save(file_name, dataset):
+    if file_name.endswith(".json"):
+        with open(config.DATA_DIR + file_name, "w") as file:
+            file.seek(0)
+            file.write(json.dumps(dataset))
+
+    elif file_name.endswith(".pkl"):
+        with open(config.DATA_DIR + file_name, "wb") as file:
+            pickle.dump(dataset, file)
+        
+    else:
+        raise ValueError("Invalid file format")
+
+
+def read_file(file_name):
+    if file_name.endswith(".patch"):
+        with open(config.PATCH_DATA_DIR + file_name) as file:
+            return file.read()
 
 def commit(file_name, dataset):
     with open(config.DATA_DIR + file_name, "w") as file:                
@@ -47,4 +75,5 @@ def get_foreign_key_pairs(dataset, foreign_key_field_name):
             pairs[item[foreign_key_field_name]] = [item]
 
     return pairs
+
     

@@ -1,0 +1,214 @@
+{% extends "generic.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4" style="color: #444;">Code/Patch Comparison Framework</h1>
+  <p class="text-center mb-5" style="color: #666;">
+    This will simplify the process of code/patch comparison. The data is saved to 
+    <span style="color: red; font-family: 'Courier New', Courier, monospace;">labels.json</span>.
+  </p>
+  <p class="text-center mb-5" style="color: #666;">
+    Please follow the tutorial below before continuing.
+  </p>
+
+  <div class="accordion" id="tutorialAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingType1">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseType1" aria-expanded="false" aria-controls="collapseType1">
+          Type-1 Clones (Identical Similarity)
+        </button>
+      </h2>
+      <div id="collapseType1" class="accordion-collapse collapse" aria-labelledby="headingType1" data-bs-parent="#tutorialAccordion">
+        <div class="accordion-body">
+          <p style="color: #555;">
+            Type-1 clones refer to identical code fragments differing only in white-space, layout, and comments.
+          </p>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <h5 class="text-center" style="color: #007BFF;">Original Code</h5>
+              <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+3 String sequence(int start, int stop) {
+4     StringBuilder builder = new StringBuilder();
+5     int i = start;
+6     while (i <= stop) {
+7         if (i > start) builder.append(',');
+8         builder.append(i);
+9         i++;
+10    }
+11    return builder.toString();
+12 }
+              </pre>
+            </div>
+            <div class="col-md-6">
+              <h5 class="text-center" style="color: #28A745;">Type-1 Clone</h5>
+              <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+3 String sequence(int start, int stop) {
+4     StringBuilder builder = new StringBuilder();
+5     int i = start;
+6     while (i <= stop) {
+7         if (i > start) builder.append(','); <span style="color: orange;">// Add separator</span>
+8         builder.append(i);
+9         i++;
+10    }
+11    return builder.toString(); <span style="color: orange;">// Returns the sequence</span>
+12 }
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingType2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseType2" aria-expanded="false" aria-controls="collapseType2">
+            Type-2 Clones (Lexical Similarity)
+          </button>
+        </h2>
+        <div id="collapseType2" class="accordion-collapse collapse" aria-labelledby="headingType2" data-bs-parent="#tutorialAccordion">
+          <div class="accordion-body">
+            <p style="color: #555;">
+              Type-2 clones refer to identical code fragments with variations in identifier names and lexical values, in addition to differences in white-space, layout, and comments.
+            </p>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <h5 class="text-center" style="color: #007BFF;">Original Code</h5>
+                <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+  3 String sequence(int start, int stop) {
+  4     StringBuilder builder = new StringBuilder();
+  5     int i = start;
+  6     while (i <= stop) {
+  7         if (i > start) builder.append(',');
+  8         builder.append(i);
+  9         i++;
+  10    }
+  11    return builder.toString();
+  12 }
+                </pre>
+              </div>
+              <div class="col-md-6">
+                <h5 class="text-center" style="color: #28A745;">Type-2 Clone</h5>
+                <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+  3 String sequence(int <span style="color: orange;">begin</span>, int <span style="color: orange;">end</span>) {
+  4     StringBuilder builder = new StringBuilder();
+  5     int <span style="color: orange;">n</span> = <span style="color: orange;">begin</span>;
+  6     while (<span style="color: orange;">n</span> <= <span style="color: orange;">end</span>) {
+  7         if (<span style="color: orange;">n</span> > <span style="color: orange;">begin</span>) builder.append(',');
+  8         builder.append(<span style="color: orange;">n</span>);
+  9         <span style="color: orange;">n</span>++;
+  10    }
+  11    return builder.toString();
+  12 }
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingType3">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseType3" aria-expanded="false" aria-controls="collapseType3">
+            Type-3 Clones (Syntactic Similarity)
+          </button>
+        </h2>
+        <div id="collapseType3" class="accordion-collapse collapse" aria-labelledby="headingType3" data-bs-parent="#tutorialAccordion">
+          <div class="accordion-body">
+            <p style="color: #555;">
+              Type-3 clones refer to syntactically similar code snippets that vary at the statement level. These clones may involve additions, modifications, or removals of statements, in addition to differences found in Type-1 and Type-2 clones.
+            </p>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <h5 class="text-center" style="color: #007BFF;">Original Code</h5>
+                <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+  3 String sequence(int start, int stop) {
+  4     StringBuilder builder = new StringBuilder();
+  5     int i = start;
+  6     while (i <= stop) {
+  7         if (i > start) builder.append(',');
+  8         builder.append(i);
+  9         i++;
+  10    }
+  11    return builder.toString();
+  12 }
+                </pre>
+              </div>
+              <div class="col-md-6">
+                <h5 class="text-center" style="color: #28A745;">Type-3 Clone</h5>
+                <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+  3 String sequence(short start, short stop) {
+  4     StringBuilder builder = new StringBuilder();
+  5     <span style="color: orange;">for (short i = start; i <= stop; i++) {</span>
+  6         if (i > start) builder.append(',');
+  7         builder.append(i);
+  8         <span style="color: orange;">\\ Removed Statement</span>
+  9     }
+  10     return builder.toString();
+  11 }
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingType4">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseType4" aria-expanded="false" aria-controls="collapseType4">
+            Type-4 Clones (Semantic Similarity)
+          </button>
+        </h2>
+        <div id="collapseType4" class="accordion-collapse collapse" aria-labelledby="headingType4" data-bs-parent="#tutorialAccordion">
+          <div class="accordion-body">
+            <p style="color: #555;">
+              Type-4 clones refer to code fragments that are semantically similar but syntactically dissimilar. These clones implement the same functionality but use different structures or approaches.
+            </p>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <h5 class="text-center" style="color: #007BFF;">Original Code</h5>
+                <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+  3 String sequence(int start, int stop) {
+  4     StringBuilder builder = new StringBuilder();
+  5     int i = start;
+  6     while (i <= stop) {
+  7         if (i > start) builder.append(',');
+  8         builder.append(i);
+  9         i++;
+  10    }
+  11    return builder.toString();
+  12 }
+                </pre>
+              </div>
+              <div class="col-md-6">
+                <h5 class="text-center" style="color: #28A745;">Type-4 Clone</h5>
+                <pre style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+  3 String range(short n, short m) {
+  4     if (n == m)
+  5         return Short.toString(n);
+  6     return Short.toString(n) + "," + range(n + 1, m);
+  7 }
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="container mt-5">
+        <form method="POST" action="" style="max-width: 400px; margin: auto;">
+          {% csrf_token %}
+          <div class="mb-3">
+            <input type="text" name="id" id="idInput" class="form-control" placeholder="Enter ID" required>
+          </div>
+          <button type="submit" class="btn btn-warning w-100">Submit</button>
+        </form>
+    </div>
+      
+
+  </div>
+</div>
+{% endblock content %}

@@ -39,12 +39,24 @@
 
     <script src="{% static 'js/bootstrap-fixes.js' %}?version={% now 'U' %}"></script>
     <script src="{% static 'js/utils.js' %}?version={% now 'U' %}"></script>
-
+    
     {% block scripts %}{% endblock scripts %}
 </head>
 
-<body class="container light">
-    {% block navbar %}{% endblock navbar %}
+<body class="px-3 light">
+    {% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light px-5">
+        <a class="navbar-brand col-10" href="#">APRTSM</a>
+        <div class="ms-auto d-flex align-items-center">
+          {% if request.session.user_id %}
+            <span class="text-primary" style="font-weight: bold;">
+              {{ request.session.user_id }}
+            </span>
+          {% endif %}
+        </div>
+      </nav>
+      {% endblock navbar %}
+
     <div class="row min-vh-100 shadow-lg white">
         
         {% block sidebar %}{% endblock sidebar %}
