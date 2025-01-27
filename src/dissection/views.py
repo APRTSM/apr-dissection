@@ -59,7 +59,13 @@ class ComparisonView(View):
         all_tool_patches = query.get_all("cleaned-tool-patches.pkl")
         all_correct_tool_patches = all_tool_patches[all_tool_patches["correctness"] == "Correct"]
 
-        all_correct_tool_patches.at[tool_patch_index, "expert_label"] = expert_label
+        tool_patch = all_correct_tool_patches.iloc[int(tool_patch_index)]
+        all_tool_patches.at[tool_patch.name, "expert_label"] = expert_label
+
+
+        print(expert_label)
+        print(all_correct_tool_patches)
+        print(all_correct_tool_patches.iloc[int(tool_patch_index)])
         query.save("cleaned-tool-patches.pkl", all_tool_patches)
 
         next_tool_patch_index = tool_patch_index + 1
