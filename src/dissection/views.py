@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse
 from .utils import config, query
 from django.http import HttpResponseRedirect
+import pandas as pd
 
 
 class IndexView(TemplateView):
@@ -31,42 +32,40 @@ class ComparisonView(View):
     def get(self, request, *args, **kwargs):
         tool_patch_index = kwargs.get("tool_patch_index")
 
+
         all_developer_patches = query.get_all("cleaned-developer-patches.pkl")
         all_tool_patches = query.get_all("cleaned-tool-patches.pkl")
+        all_patches = pd.concat([all_developer_patches, all_tool_patches])
 
-        all_correct_tool_patches = all_tool_patches[all_tool_patches["correctness"] == "Correct"]
+        unlabeled_pairs = query.get_all("EXP2-unlabeled-tbar.pkl")
+        unlabeled_pair = unlabeled_pairs.iloc[int(tool_patch_index)]
 
-        tool_patch = all_correct_tool_patches.iloc[int(tool_patch_index)]
-        developer_patch = all_developer_patches[all_developer_patches["bug_uid"] == tool_patch["bug_uid"]].iloc[0]
+        new_tool_patch = all_patches.loc[unlabeled_pair["uid"]]
+        groundtruth_patch = all_patches.loc[unlabeled_pair["groundtruth_index"]]
 
-        developer_diff = query.read_file(f"{developer_patch.name}.patch")
-        tool_patch_diff = query.read_file(f"{tool_patch.name}.patch")
+        new_tool_patch_diff = query.read_file(f"{new_tool_patch.name}.patch")
+        groundtruth_patch_diff = query.read_file(f"{groundtruth_patch.name}.patch")
 
         return render(request, self.template_name, {
-            "bug_uid": tool_patch["bug_uid"],
+            "bug_uid": new_tool_patch["bug_uid"],
             "tool_patch_index": tool_patch_index,
-            "developer_patch_name": developer_patch.name, 
-            "tool_patch_name": tool_patch.name, 
-            "developer_diff": developer_diff, 
-            "tool_patch_diff": tool_patch_diff,
-            "tool_patch_expert_label": tool_patch["expert_label"],
+            "developer_patch_name": groundtruth_patch.name, 
+            "tool_patch_name": new_tool_patch.name, 
+            "developer_diff": groundtruth_patch_diff, 
+            "tool_patch_diff": new_tool_patch_diff,
+            "tool_patch_expert_label": unlabeled_pair["expert_label"],
         })
 
     def post(self, request, *args, **kwargs):
         tool_patch_index = int(kwargs.get("tool_patch_index"))
         expert_label = request.POST.get("type")
 
-        all_tool_patches = query.get_all("cleaned-tool-patches.pkl")
-        all_correct_tool_patches = all_tool_patches[all_tool_patches["correctness"] == "Correct"]
+        unlabeled_pairs = query.get_all("EXP2-unlabeled-tbar.pkl")
 
-        tool_patch = all_correct_tool_patches.iloc[int(tool_patch_index)]
-        all_tool_patches.at[tool_patch.name, "expert_label"] = expert_label
+        unlabeled_pair = unlabeled_pairs.iloc[int(tool_patch_index)]
+        unlabeled_pairs.at[unlabeled_pair.name, "expert_label"] = expert_label
 
-
-        print(expert_label)
-        print(all_correct_tool_patches)
-        print(all_correct_tool_patches.iloc[int(tool_patch_index)])
-        query.save("cleaned-tool-patches.pkl", all_tool_patches)
+        query.save("EXP2-unlabeled-tbar.pkl", unlabeled_pairs)
 
         next_tool_patch_index = tool_patch_index + 1
 
