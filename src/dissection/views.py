@@ -52,6 +52,7 @@ class ComparisonView(View):
             "developer_patch_name": groundtruth_patch.name, 
             "tool_patch_name": new_tool_patch.name, 
             "developer_diff": groundtruth_patch_diff, 
+            "correctness": groundtruth_patch["correctness"], 
             "tool_patch_diff": new_tool_patch_diff,
             "tool_patch_expert_label": unlabeled_pair["expert_label"],
         })
