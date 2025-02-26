@@ -47,10 +47,15 @@
 </div>
 <div class="row">
     <div class="col">
-        <span class="badge bg-info text-dark fs-6 py-2 px-3">Grount-Truth Correctness: {{ correctness }}</span>
+        <span class="badge bg-info text-dark fs-6 py-2 px-3">Correctness: {{ correctness_hidden }}</span>
     </div>
 </div>
 {% endif %}
+<div class="row">
+    <div class="col">
+        <span class="badge bg-info text-dark fs-6 py-2 px-3">Grount-Truth Correctness: {{ correctness }}</span>
+    </div>
+</div>
 
 <div class="row mt-4">
     <div class="col-lg-6 mx-auto">
@@ -63,6 +68,7 @@
                     <option value="Type-2">Type-2</option>
                     <option value="Type-3">Type-3</option>
                     <option value="Type-4">Type-4</option>
+                    <option value="Not-Clone">Not Clone</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
