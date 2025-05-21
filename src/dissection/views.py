@@ -37,11 +37,11 @@ class ComparisonView(View):
         all_tool_patches = query.get_all("cleaned-tool-patches.pkl")
         all_patches = pd.concat([all_developer_patches, all_tool_patches])
 
-        unlabeled_pairs = query.get_all("EXP2-unlabeled-tbar.pkl")
+        unlabeled_pairs = query.get_all("t.pkl")
         unlabeled_pair = unlabeled_pairs.iloc[int(tool_patch_index)]
 
-        new_tool_patch = all_patches.loc[unlabeled_pair["uid"]]
-        groundtruth_patch = all_patches.loc[unlabeled_pair["groundtruth_index"]]
+        new_tool_patch = all_patches.loc[unlabeled_pair.name]
+        groundtruth_patch = all_developer_patches[all_developer_patches["bug_uid"] == new_tool_patch["bug_uid"]].iloc[0]
 
         new_tool_patch_diff = query.read_file(f"{new_tool_patch.name}.patch")
         groundtruth_patch_diff = query.read_file(f"{groundtruth_patch.name}.patch")
@@ -56,18 +56,19 @@ class ComparisonView(View):
             "correctness_hidden": new_tool_patch["correctness"],
             "tool_patch_diff": new_tool_patch_diff,
             "tool_patch_expert_label": unlabeled_pair["expert_label"],
+            "predicted_label": unlabeled_pair["predicted_label"],
         })
 
     def post(self, request, *args, **kwargs):
         tool_patch_index = int(kwargs.get("tool_patch_index"))
         expert_label = request.POST.get("type")
 
-        unlabeled_pairs = query.get_all("EXP2-unlabeled-tbar.pkl")
+        unlabeled_pairs = query.get_all("t.pkl")
 
         unlabeled_pair = unlabeled_pairs.iloc[int(tool_patch_index)]
         unlabeled_pairs.at[unlabeled_pair.name, "expert_label"] = expert_label
 
-        query.save("EXP2-unlabeled-tbar.pkl", unlabeled_pairs)
+        query.save("t.pkl", unlabeled_pairs)
 
         next_tool_patch_index = tool_patch_index + 1
 
