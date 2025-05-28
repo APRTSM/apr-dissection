@@ -38,6 +38,7 @@ class ComparisonView(View):
         all_patches = pd.concat([all_developer_patches, all_tool_patches])
 
         unlabeled_pairs = query.get_all("EXP2-unlabeled-tbar.pkl")
+        print(unlabeled_pairs)
         unlabeled_pair = unlabeled_pairs.iloc[int(tool_patch_index)]
 
         new_tool_patch = all_patches.loc[unlabeled_pair["uid"]]
