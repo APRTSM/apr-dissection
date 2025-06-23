@@ -38,7 +38,34 @@ class ComparisonView(View):
         all_patches = pd.concat([all_developer_patches, all_tool_patches])
 
         unlabeled_pairs = query.get_all("EXP2-unlabeled-tbar.pkl")
+
+        ###
+        # Create sets for checking bidirectional pairs
+        # pairs = set()
+        # bidirectional_pairs = set()
+
+        # # Check for bidirectional pairs
+        # for _, row in unlabeled_pairs.iterrows():
+        #     uid = row["uid"]
+        #     ground = row["groundtruth_index"]
+            
+        #     # Check if current pair exists
+        #     pair = (uid, ground)
+        #     reverse_pair = (ground, uid)
+            
+        #     if reverse_pair in pairs:
+        #         bidirectional_pairs.add(tuple(sorted([uid, ground])))
+            
+        #     pairs.add(pair)
+
+        # print(f"Found {len(bidirectional_pairs)} bidirectional pairs:")
+        # for pair in bidirectional_pairs:
+        #     print(f"- {pair[0]} and {pair[1]}")
+
         print(unlabeled_pairs)
+        print(len(unlabeled_pairs["uid"].unique()))
+        ###
+
         unlabeled_pair = unlabeled_pairs.iloc[int(tool_patch_index)]
 
         new_tool_patch = all_patches.loc[unlabeled_pair["uid"]]
